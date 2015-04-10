@@ -29,6 +29,7 @@ import org.apache.camel.component.facebook.FacebookConstants;
 
 import facebook4j.Album;
 import facebook4j.AlbumUpdate;
+import facebook4j.BackdatingPostUpdate;
 import facebook4j.Checkin;
 import facebook4j.CheckinUpdate;
 import facebook4j.Comment;
@@ -43,14 +44,24 @@ import facebook4j.InboxResponseList;
 import facebook4j.Link;
 import facebook4j.Media;
 import facebook4j.Message;
+import facebook4j.MilestoneUpdate;
 import facebook4j.Note;
+import facebook4j.Offer;
+import facebook4j.OfferUpdate;
+import facebook4j.Page;
+import facebook4j.PageCoverUpdate;
+import facebook4j.PagePhotoUpdate;
+import facebook4j.PageSettingUpdate;
+import facebook4j.PageUpdate;
 import facebook4j.Photo;
+import facebook4j.PhotoUpdate;
 import facebook4j.PictureSize;
 import facebook4j.Post;
 import facebook4j.PostUpdate;
 import facebook4j.Question;
 import facebook4j.Reading;
 import facebook4j.ResponseList;
+import facebook4j.TabUpdate;
 import facebook4j.TagUpdate;
 import facebook4j.TestUser;
 import facebook4j.User;
@@ -215,6 +226,7 @@ public enum FacebookMethodsType {
     ADDFRIENDLISTMEMBER(Boolean.class, "addFriendlistMember", String.class, "friendlistId", String.class, "userId"),
     CREATEFRIENDLIST(String.class, "createFriendlist", String.class, "friendlistName"),
     CREATEFRIENDLIST_WITH_ID(String.class, "createFriendlist", String.class, "userId", String.class, "friendlistName"),
+    DELETEFRIENDLISTMEMBER(Boolean.class, "deleteFriendlistMember", String.class, "friendlistId", String.class, "userId"),
     DELETEFRIENDLIST(Boolean.class, "deleteFriendlist", String.class, "friendlistId"),
     GETBELONGSFRIEND(ResponseList.class, "getBelongsFriend", String.class, "friendId"),
     GETBELONGSFRIEND_WITH_OPTIONS(ResponseList.class, "getBelongsFriend", String.class, "friendId", Reading.class, FacebookConstants.READING_PPROPERTY),
@@ -474,6 +486,7 @@ public enum FacebookMethodsType {
     GETPICTUREURL_WITH_ID_PICTURESIZE(URL.class,  "getPictureURL", String.class, "userId", PictureSize.class, "size"),
     GETSSLPICTUREURL(URL.class,  "getSSLPictureURL"),
     GETSSLPICTUREURL_WITH_PICTURESIZE(URL.class,  "getSSLPictureURL", PictureSize.class, "size"),
+    GETSSLPICTUREURL_WITH_ID(URL.class,  "getSSLPictureURL", String.class, "userId"),
     GETUSER(User.class,  "getUser", String.class, "userId"),
     GETUSER_WITH_OPTIONS(User.class,  "getUser", String.class, "userId", Reading.class, FacebookConstants.READING_PPROPERTY),
     GETUSERS(List.class, "getUsers", new String[0].getClass(), "ids"),
@@ -518,8 +531,97 @@ public enum FacebookMethodsType {
     SEARCHPOSTS(ResponseList.class, "searchPosts", String.class, "query"),
     SEARCHPOSTS_WITH_OPTIONS(ResponseList.class, "searchPosts", String.class, "query", Reading.class, FacebookConstants.READING_PPROPERTY),
     SEARCHUSERS(ResponseList.class, "searchUsers", String.class, "query"),
-    SEARCHUSERS_WITH_OPTIONS(ResponseList.class, "searchUsers", String.class, "query", Reading.class, FacebookConstants.READING_PPROPERTY);
-
+    SEARCHUSERS_WITH_OPTIONS(ResponseList.class, "searchUsers", String.class, "query", Reading.class, FacebookConstants.READING_PPROPERTY),    
+    
+    // NEW WITH 2.2.2 API
+    BLOCK_USERLIST(Map.class, "block", List.class, "list"),
+    BLOCK_USERLIST_WITH_PAGEID(Map.class, "block", String.class, "pageId", List.class, "list"),
+    GET_PROMOTABLE_POSTS(ResponseList.class, "getPromotablePosts"),
+    GET_PROMOTABLE_POSTS_WITH_PAGEID(ResponseList.class, "getPromotablePosts", String.class, "pageId"),
+    GET_PROMOTABLE_POSTS_WITH_READING(ResponseList.class, "getPromotablePosts", Reading.class , "reading"),
+    POST_PAGE_PHOTO(String.class, "postPagePhoto", PagePhotoUpdate.class , "pagePhotoUpdate"),
+    POST_PAGE_PHOTO_WITH_PAGEID(String.class, "postPagePhoto", String.class, "pageId", PagePhotoUpdate.class , "pagePhotoUpdate"),
+    GET_PAGE_TAGGED(ResponseList.class, "getPageTagged", String.class, "pageId"),
+    GET_PAGE_TAGGED_WITH_READING(ResponseList.class, "getPageTagged", String.class, "pageId", Reading.class , "reading"),
+    GET_PAGE(Page.class, "getPage"),
+    GET_PAGE_WITH_READING(Page.class, "getPage", String.class, "pageId", Reading.class, "reading"),
+    GET_PAGE_PICTURE_URL(URL.class, "getPagePictureURL"),
+    GET_PAGE_PICTURE_URL_WITH_SIZE(URL.class, "getPagePictureURL", PictureSize.class, "pictureSize"),
+    GET_PAGE_PICTURE_URL_WITH_PAGEID(URL.class, "getPagePictureURL", String.class, "pageId"),
+    GET_PAGE_PICTURE_URL_WITH_PAGEID_AND_SIZE(URL.class, "getPagePictureURL", String.class, "pageId", PictureSize.class, "pictureSize"),
+    UPDATE_PAGE_BASIC_ATTRIBUTES(Boolean.class, "updatePageBasicAttributes", PageUpdate.class, "pageUpdate"),
+    UPDATE_PAGE_BASIC_ATTRIBUTES_WITH_PAGEID(boolean.class, "updatePageBasicAttributes", String.class, "pageId", PageUpdate.class, "pageUpdate"),   
+    UPDATE_PAGE_PROFILE_PHOTO(boolean.class, "updatePageProfilePhoto", Media.class, "source"),
+    UPDATE_PAGE_PROFILE_PHOTO_WITH_PAGEID(boolean.class, "updatePageProfilePhoto", String.class, "pageId", Media.class, "source"),
+    UPDATE_PAGE_PROFILE_PHOTO_WITH_PAGEID_AND_URL(boolean.class, "updatePageProfilePhoto", String.class, "pageId", URL.class, "picture"),
+    UPDATE_PAGE_PROFILE_PHOTO_WITH_URL(boolean.class, "updatePageProfilePhoto", URL.class, "picture"),
+    UPDATE_PAGE_COVER_PHOTO(boolean.class, "updatePageCoverPhoto", PageCoverUpdate.class, "pageCoverUpdate"),
+    UPDATE_PAGE_COVER_PHOTO_WITH_PAGEID(boolean.class, "updatePageCoverPhoto", String.class, "pageId", PageCoverUpdate.class, "pageCoverUpdate"),
+    DISPLAY_PAGE_POST(boolean.class, "displayPagePost", String.class, "pageId", boolean.class, "isHidden"),
+    GET_PAGE_SETTINGS(ResponseList.class, "getPageSettings"),
+    GET_PAGE_SETTINGS_WITH_PAGEID(ResponseList.class, "getPageSettings", String.class, "pageId"),
+    UPDATE_PAGE_SETTING(boolean.class, "updatePageSetting", PageSettingUpdate.class, "pageSettingUpdate"),
+    UPDATE_PAGE_SETTING_WITH_PAGEID(boolean.class, "updatePageSetting", String.class, "pageId", PageSettingUpdate.class, "pageSettingUpdate"),
+    POST_BACKDATING_FEED(String.class, "postBackdatingFeed", BackdatingPostUpdate.class, "backdatingPostUpdate"),
+    POST_BACKDATING_FEED_WITH_PAGEID(String.class, "postBackdatingFeed", String.class, "pageId", BackdatingPostUpdate.class, "backdatingPostUpdate"),
+    GET_GLOBAL_BRAND_CHILDREN(ResponseList.class, "getGlobalBrandChildren", String.class, "pageId"),
+    GET_GLOBAL_BRAND_CHILDREN_WITH_READING(ResponseList.class, "getGlobalBrandChildren", String.class, "pageId", Reading.class, "reading"),
+    GET_PAGE_INSIGHTS(ResponseList.class, "getPageInsights", String.class, "pageId"),
+    GET_PAGE_INSIGHTS_WITH_READING(ResponseList.class, "getPageInsights", String.class, "pageId", Reading.class, "reading"),
+    GET_MILESTONES(ResponseList.class, "getMilestones"),
+    GET_MILESTONES_WITH_PAGEID(ResponseList.class, "getMilestones", String.class, "pageId"),
+    GET_MILESTONES_WITH_READING(ResponseList.class, "getMilestones", Reading.class, "reading"),
+    GET_PAGE_INSIGHTS_WITH_PAGEID_AND_READING(ResponseList.class, "getMilestones", String.class, "pageId", Reading.class, "reading"),
+    CREATE_MILESTONE(String.class, "createMilestone", MilestoneUpdate.class, "milestoneUpdate"),
+    CREATE_MILESTONE_WITH_PAGEID(String.class, "createMilestone", String.class, "pageId", MilestoneUpdate.class, "milestoneUpdate"),
+    DELETE_MILESTONE(boolean.class, "deleteMilestone", String.class, "milestoneId"),
+    GET_PAGE_ADMINS(ResponseList.class, "getPageAdmins"),
+    GET_PAGE_ADMINS_WITH_PAGEID(ResponseList.class, "getPageAdmins", String.class, "pageId"),
+    GET_PAGE_ADMINS_WITH_READING(ResponseList.class, "getPageAdmins", Reading.class, "reading"),
+    GET_PAGE_ADMINS_WITH_PAGEID_AND_READING(ResponseList.class, "getPageAdmins", String.class, "pageId", Reading.class, "reading"),
+    GET_TABS(ResponseList.class, "getTabs"),
+    GET_TABS_WITH_PAGEID(ResponseList.class, "getTabs", String.class, "pageId"),
+    GET_TABS_WITH_READING(ResponseList.class, "getTabs", Reading.class, "reading"),
+    GET_TABS_WITH_PAGEID_AND_READING(ResponseList.class, "getTabs", String.class, "pageId", Reading.class, "reading"),
+    GET_INSTALLED_TABS(ResponseList.class, "getInstalledTabs", List.class, "appIds"),
+    GET_INSTALLED_TABS_WITH_PAGEID(ResponseList.class, "getInstalledTabs",String.class, "pageId",  List.class, "appIds"),
+    GET_INSTALLED_TABS_WITH_READING(ResponseList.class, "getInstalledTabs",  List.class, "appIds", Reading.class, "reading"),
+    GET_INSTALLED_TABS_WITH_PAGEID_AND_READING(ResponseList.class, "getInstalledTabs", String.class, "pageId", List.class, "appIds", Reading.class, "reading"),
+    INSTALL_TAB(boolean.class, "installTab", String.class, "appId"),
+    INSTALL_TAB_WITH_PAGEID(boolean.class, "installTab", String.class, "pageId", String.class, "appId"),
+    UPDATE_TAB(boolean.class, "updateTab", String.class, "tabId", TabUpdate.class, "tabUpdate"),
+    UPDATE_TAB_WITH_PAGEID(boolean.class, "updateTab", String.class, "pageId", String.class, "tabId", TabUpdate.class, "tabUpdate"),
+    DELETE_TAB(boolean.class, "deleteTab", String.class, "tabId"),
+    DELETE_TAB_WITH_PAGEID(boolean.class, "deleteTab", String.class, "pageId", String.class, "tabId"),
+    GET_BLOCKED(ResponseList.class, "getBlocked"),
+    GET_BLOCKED_WITH_PAGEID(ResponseList.class, "getBlocked", String.class, "pageId"),
+    GET_BLOCKEDS_WITH_READING(ResponseList.class, "getBlocked", Reading.class, "reading"),
+    GET_BLOCKED_WITH_PAGEID_AND_READING(ResponseList.class, "getBlocked", String.class, "pageId", Reading.class, "reading"),
+    UNBLOCK(boolean.class, "unblock", String.class, "userId"),
+    UNBLOCK_WITH_PAGEID(boolean.class, "unblock", String.class, "pageId", String.class, "userId"),
+    GET_OFFERS(ResponseList.class, "getOffers"),
+    GET_OFFERS_WITH_PAGEID(ResponseList.class, "getOffers", String.class, "pageId"),
+    GET_OFFERS_WITH_READING(ResponseList.class, "getOffers", Reading.class, "reading"),
+    GET_OFFERS_WITH_PAGEID_AND_READING(ResponseList.class, "getOffers", String.class, "pageId", Reading.class, "reading"),
+    CREATE_OFFER(String.class, "createOffer", OfferUpdate.class, "offerUpdate"),
+    CREATE_OFFER_WITH_PAGEID(ResponseList.class, "createOffer", String.class, "pageId", OfferUpdate.class, "offerUpdate"),
+    DELETE_OFFER(boolean.class, "deleteOffer", String.class, "offerId"),
+    GET_OFFER(Offer.class, "getOffer", String.class, "offerId"),
+    GET_LIKED_PAGE(Page.class, "getLikedPage", String.class, "pageId"),
+    GET_LIKED_PAGE_WITH_READING(Page.class, "getLikedPage", String.class, "pageId", Reading.class, "reading"),
+    GET_LIKED_PAGE_WITH_USERID(Page.class, "getLikedPage", String.class, "userId", String.class, "pageId"),
+    GET_LIKED_PAGE_WITH_USERID_AND_READING(Page.class, "getLikedPage", String.class, "userId", String.class, "pageId", Reading.class, "reading"),
+    DELETE_PERMISSION(boolean.class, "deletePermission", String.class, "permissionName"),
+    DELETE_PERMISSION_WITH_USERID(boolean.class, "deletePermission", String.class, "userId", String.class, "permissionName"),
+    GET_UPLOADED_PHOTOS(ResponseList.class, "getUploadedPhotos"),
+    GET_UPLOADED_PHOTOS_WITH_PAGEID(ResponseList.class, "getUploadedPhotos", String.class, "pageId"),
+    GET_UPLOADED_PHOTOS_WITH_READING(ResponseList.class, "getUploadedPhotos", Reading.class, "reading"),
+    GET_UPLOADED_PHOTOS_WITH_PAGEID_AND_READING(ResponseList.class, "getUploadedPhotos", String.class, "pageId", Reading.class, "reading"),
+    POSTPHOTO_UPDATE(String.class, "postPhoto", PhotoUpdate.class, "photoUpdate"),
+    POSTPHOTO_UPDATE_WITH_USERID(String.class, "postPhoto", String.class, "userId", PhotoUpdate.class, "photoUpdate"),
+    DELETE_TAG_ON_PHOTO(boolean.class, "deleteTagOnPhoto", String.class, "photoId", String.class, "toUserId");
+    
+    
     // name, result class, ordered argument names and classes, and Method to invoke
     private final String name;
     private final Class<?> resultType;
