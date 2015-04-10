@@ -25,10 +25,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.camel.component.facebook.FacebookConstants;
+
 import facebook4j.Album;
-import facebook4j.AlbumCreate;
+import facebook4j.AlbumUpdate;
 import facebook4j.Checkin;
-import facebook4j.CheckinCreate;
+import facebook4j.CheckinUpdate;
 import facebook4j.Comment;
 import facebook4j.Domain;
 import facebook4j.Event;
@@ -55,8 +57,6 @@ import facebook4j.User;
 import facebook4j.Video;
 import facebook4j.internal.org.json.JSONArray;
 
-import org.apache.camel.component.facebook.FacebookConstants;
-
 /**
  * Enum for Facebook4J *Method interfaces.
  * The methods are ordered by the number and nature of arguments.
@@ -79,8 +79,8 @@ public enum FacebookMethodsType {
     ADDALBUMPHOTO(String.class, "addAlbumPhoto", String.class, "albumId", Media.class, "source"),
     ADDALBUMPHOTO_WITH_MEDIA(String.class, "addAlbumPhoto", String.class, "albumId", Media.class, "source", String.class, "message"),
     COMMENTALBUM(String.class, "commentAlbum", String.class, "albumId", String.class, "message"),
-    CREATEALBUM(String.class, "createAlbum", AlbumCreate.class, "albumCreate"),
-    CREATEALBUM_WITH_ID(String.class, "createAlbum", String.class, "userId", AlbumCreate.class, "albumCreate"),
+    CREATEALBUM(String.class, "createAlbum", AlbumUpdate.class, "albumCreate"),
+    CREATEALBUM_WITH_ID(String.class, "createAlbum", String.class, "userId", AlbumUpdate.class, "albumCreate"),
     GETALBUM(Album.class,  "getAlbum", String.class, "albumId"),
     GETALBUM_WITH_OPTIONS(Album.class,  "getAlbum", String.class, "albumId", Reading.class, FacebookConstants.READING_PPROPERTY),
     GETALBUMCOMMENTS(ResponseList.class, "getAlbumComments", String.class, "albumId"),
@@ -98,8 +98,8 @@ public enum FacebookMethodsType {
     UNLIKEALBUM(boolean.class, "unlikeAlbum", String.class, "albumId"),
 
     // CheckinMethods
-    CHECKIN(String.class, "checkin", CheckinCreate.class, "checkinCreate"),
-    CHECKIN_WITH_ID(String.class, "checkin", String.class, "userId", CheckinCreate.class, "checkinCreate"),
+    CHECKIN(String.class, "checkin", CheckinUpdate.class, "checkinCreate"),
+    CHECKIN_WITH_ID(String.class, "checkin", String.class, "userId", CheckinUpdate.class, "checkinCreate"),
     COMMENTCHECKIN(String.class, "commentCheckin", String.class, "checkinId", String.class, "message"),
     GETCHECKIN(Checkin.class, "getCheckin", String.class, "checkinId"),
     GETCHECKIN_WITH_OPTIONS(Checkin.class, "getCheckin", String.class, "checkinId", Reading.class, FacebookConstants.READING_PPROPERTY),
@@ -135,8 +135,8 @@ public enum FacebookMethodsType {
     EDITEVENT(Boolean.class,  "editEvent", String.class, "eventId", EventUpdate.class, "eventUpdate"),
     GETEVENT(Event.class,  "getEvent", String.class, "eventId"),
     GETEVENT_WITH_OPTIONS(Event.class,  "getEvent", String.class, "eventId", Reading.class, FacebookConstants.READING_PPROPERTY),
-    GETEVENTFEED(ResponseList.class, "getEventFeed", String.class, "eventId"),
-    GETEVENTFEED_WITH_OPTIONS(ResponseList.class, "getEventFeed", String.class, "eventId", Reading.class, FacebookConstants.READING_PPROPERTY),
+    //GETEVENTFEED(ResponseList.class, "getEventFeed", String.class, "eventId"),
+    //GETEVENTFEED_WITH_OPTIONS(ResponseList.class, "getEventFeed", String.class, "eventId", Reading.class, FacebookConstants.READING_PPROPERTY),
     GETEVENTPHOTOS(ResponseList.class, "getEventPhotos", String.class, "eventId"),
     GETEVENTPHOTOS_WITH_OPTIONS(ResponseList.class, "getEventPhotos", String.class, "eventId", Reading.class, FacebookConstants.READING_PPROPERTY),
     GETEVENTPICTUREURL(URL.class,  "getEventPictureURL", String.class, "eventId"),
@@ -159,7 +159,7 @@ public enum FacebookMethodsType {
     GETRSVPSTATUSINMAYBE_WITH_ID(ResponseList.class, "getRSVPStatusInMaybe", String.class, "eventId", String.class, "userId"),
     INVITETOEVENT(Boolean.class,  "inviteToEvent", String.class, "eventId", String.class, "userId"),
     INVITETOEVENT_WITH_IDS(Boolean.class,  "inviteToEvent", String.class, "eventId", new String[0].getClass(), "userIds"),
-    POSTEVENTFEED_WITH_POSTUPDATE(String.class, "postEventFeed", String.class, "eventId", PostUpdate.class, "postUpdate"),
+    //POSTEVENTFEED_WITH_POSTUPDATE(String.class, "postEventFeed", String.class, "eventId", PostUpdate.class, "postUpdate"),
     POSTEVENTLINK_WITH_LINK(String.class, "postEventLink", String.class, "eventId", URL.class , "link"),
     POSTEVENTLINK_WITH_LINK_MSG(String.class, "postEventLink", String.class, "eventId", URL.class , "link", String.class, "message"),
     POSTEVENTPHOTO_WITH_MEDIA(String.class, "postEventPhoto", String.class, "eventId", Media.class, "source"),
@@ -376,11 +376,11 @@ public enum FacebookMethodsType {
     GETTAGSONPHOTO_WITH_OPTIONS(ResponseList.class, "getTagsOnPhoto", String.class, "photoId", Reading.class, FacebookConstants.READING_PPROPERTY),
     LIKEPHOTO(Boolean.class,  "likePhoto", String.class, "photoId"),
     POSTPHOTO(String.class, "postPhoto", Media.class, "source"),
-    POSTPHOTO_WITH_MSG(String.class, "postPhoto", Media.class, "source", String.class, "message", String.class, "place", boolean.class, "noStory"),
+    //POSTPHOTO_WITH_MSG(String.class, "postPhoto", Media.class, "source", String.class, "message", String.class, "place", boolean.class, "noStory"),
     POSTPHOTO_WITH_MEDIA(String.class, "postPhoto", String.class, "userId", Media.class, "source"),
-    POSTPHOTO_WITH_MEDIA_MSG(String.class, "postPhoto", String.class, "userId", Media.class, "source", String.class, "message", String.class, "place", boolean.class, "noStory"),
+    //POSTPHOTO_WITH_MEDIA_MSG(String.class, "postPhoto", String.class, "userId", Media.class, "source", String.class, "message", String.class, "place", boolean.class, "noStory"),
     UNLIKEPHOTO(Boolean.class,  "unlikePhoto", String.class, "photoId"),
-    UPDATETAGONPHOTO(Boolean.class,  "updateTagOnPhoto", String.class, "photoId", String.class, "toUserId"),
+    //UPDATETAGONPHOTO(Boolean.class,  "updateTagOnPhoto", String.class, "photoId", String.class, "toUserId"),
     UPDATETAGONPHOTO_WITH_TAGUPDATE(Boolean.class,  "updateTagOnPhoto", String.class, "photoId", TagUpdate.class, "tagUpdate"),
 
     // PokeMethods
@@ -433,10 +433,10 @@ public enum FacebookMethodsType {
 
     // QuestionMethods
     ADDQUESTIONOPTION(String.class, "addQuestionOption", String.class, "questionId", String.class, "optionDescription"),
-    CREATEQUESTION(String.class, "createQuestion", String.class, "question"),
-    CREATEQUESTION_WITH_OPTIONS(String.class, "createQuestion", String.class, "question", List.class, "options", boolean.class, "allowNewOptions"),
-    CREATEQUESTION_WITH_ID(String.class, "createQuestion", String.class, "userId", String.class, "question"),
-    CREATEQUESTION_WITH_ID_OPTIONS(String.class, "createQuestion", String.class, "userId", String.class, "question", List.class, "options", boolean.class, "allowNewOptions"),
+    //CREATEQUESTION(String.class, "createQuestion", String.class, "question"),
+    //CREATEQUESTION_WITH_OPTIONS(String.class, "createQuestion", String.class, "question", List.class, "options", boolean.class, "allowNewOptions"),
+    //CREATEQUESTION_WITH_ID(String.class, "createQuestion", String.class, "userId", String.class, "question"),
+    //CREATEQUESTION_WITH_ID_OPTIONS(String.class, "createQuestion", String.class, "userId", String.class, "question", List.class, "options", boolean.class, "allowNewOptions"),
     DELETEQUESTION(Boolean.class,  "deleteQuestion", String.class, "questionId"),
     GETQUESTION(Question.class,  "getQuestion", String.class, "questionId"),
     GETQUESTION_WITH_OPTIONS(Question.class,  "getQuestion", String.class, "questionId", Reading.class, FacebookConstants.READING_PPROPERTY),
@@ -468,10 +468,12 @@ public enum FacebookMethodsType {
     // UserMethods
     GETME(User.class,  "getMe"),
     GETME_WITH_OPTIONS(User.class,  "getMe", Reading.class, FacebookConstants.READING_PPROPERTY),
-    GETPICTUREURL(URL.class,  "getPictureURL"),
+    GETPICTUREURL(URL.class,  "getPictureURL", int.class, "pictureid", int.class, "pictureid2"),
     GETPICTUREURL_WITH_PICTURESIZE(URL.class,  "getPictureURL", PictureSize.class, "size"),
     GETPICTUREURL_WITH_ID(URL.class,  "getPictureURL", String.class, "userId"),
     GETPICTUREURL_WITH_ID_PICTURESIZE(URL.class,  "getPictureURL", String.class, "userId", PictureSize.class, "size"),
+    GETSSLPICTUREURL(URL.class,  "getSSLPictureURL"),
+    GETSSLPICTUREURL_WITH_PICTURESIZE(URL.class,  "getSSLPictureURL", PictureSize.class, "size"),
     GETUSER(User.class,  "getUser", String.class, "userId"),
     GETUSER_WITH_OPTIONS(User.class,  "getUser", String.class, "userId", Reading.class, FacebookConstants.READING_PPROPERTY),
     GETUSERS(List.class, "getUsers", new String[0].getClass(), "ids"),
@@ -490,10 +492,10 @@ public enum FacebookMethodsType {
     GETVIDEOS_WITH_ID(ResponseList.class, "getVideos", String.class, "userId"),
     GETVIDEOS_WITH_ID_OPTIONS(ResponseList.class, "getVideos", String.class, "userId", Reading.class, FacebookConstants.READING_PPROPERTY),
     LIKEVIDEO(Boolean.class,  "likeVideo", String.class, "videoId"),
-    POSTVIDEO(String.class, "postVideo", Media.class, "source"),
-    POSTVIDEO_WITH_TITLE(String.class, "postVideo", Media.class, "source", String.class, "title", String.class, "description"),
-    POSTVIDEO_WITH_ID(String.class, "postVideo", String.class, "userId", Media.class, "source"),
-    POSTVIDEO_WITH_ID_MEDIA(String.class, "postVideo", String.class, "userId", Media.class, "source", String.class, "title", String.class, "description"),
+    //POSTVIDEO(String.class, "postVideo", Media.class, "source"),
+    //POSTVIDEO_WITH_TITLE(String.class, "postVideo", Media.class, "source", String.class, "title", String.class, "description"),
+    //POSTVIDEO_WITH_ID(String.class, "postVideo", String.class, "userId", Media.class, "source"),
+    //POSTVIDEO_WITH_ID_MEDIA(String.class, "postVideo", String.class, "userId", Media.class, "source", String.class, "title", String.class, "description"),
     UNLIKEVIDEO(Boolean.class,  "unlikeVideo", String.class, "videoId"),
 
     // SearchMethods get the highest priority with higher ordinal values

@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import facebook4j.AlbumCreate;
-import facebook4j.CheckinCreate;
+import facebook4j.AlbumUpdate;
+import facebook4j.CheckinUpdate;
 import facebook4j.EventUpdate;
 import facebook4j.GeoLocation;
 import facebook4j.Media;
@@ -41,7 +41,7 @@ public class FacebookEndpointConfiguration extends FacebookConfiguration {
     @UriParam
     private URL achievementURL;
     @UriParam
-    private AlbumCreate albumCreate;
+    private AlbumUpdate albumUpdate;
     @UriParam
     private String albumId;
     @UriParam
@@ -51,7 +51,7 @@ public class FacebookEndpointConfiguration extends FacebookConfiguration {
     @UriParam
     private GeoLocation center;
     @UriParam
-    private CheckinCreate checkinCreate;
+    private CheckinUpdate checkinUpdate;
     @UriParam
     private String checkinId;
     @UriParam
@@ -177,12 +177,12 @@ public class FacebookEndpointConfiguration extends FacebookConfiguration {
         this.achievementURL = achievementURL;
     }
 
-    public AlbumCreate getAlbumCreate() {
-        return albumCreate;
+    public AlbumUpdate getAlbumUpdate() {
+        return albumUpdate;
     }
 
-    public void setAlbumCreate(AlbumCreate albumCreate) {
-        this.albumCreate = albumCreate;
+    public void setAlbumUpdate(AlbumUpdate albumUpdate) {
+        this.albumUpdate = albumUpdate;
     }
 
     public String getAlbumId() {
@@ -217,12 +217,12 @@ public class FacebookEndpointConfiguration extends FacebookConfiguration {
         this.center = center;
     }
 
-    public CheckinCreate getCheckinCreate() {
-        return checkinCreate;
+    public CheckinUpdate getCheckinUpdate() {
+        return checkinUpdate;
     }
 
-    public void setCheckinCreate(CheckinCreate checkinCreate) {
-        this.checkinCreate = checkinCreate;
+    public void setCheckinUpdate(CheckinUpdate checkinUpdate) {
+        this.checkinUpdate = checkinUpdate;
     }
 
     public String getCheckinId() {

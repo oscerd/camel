@@ -105,6 +105,7 @@ public class FacebookMethodsTypeHelperTest {
                 // check all methods of this *Methods interface
                 for (Method method : clazz.getDeclaredMethods()) {
                     // will throw an exception if can't be found
+                    System.err.println(method.getName());
                     final List<Object> arguments = FacebookMethodsTypeHelper.getArguments(method.getName());
                     final int nArgs = arguments.size() / 2;
                     List<Class<?>> types = new ArrayList<Class<?>>(nArgs);
