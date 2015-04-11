@@ -36,8 +36,10 @@ public class FacebookMethodsTypeTest {
         final Class<?>[] interfaces = Facebook.class.getInterfaces();
         for (Class<?> clazz : interfaces) {
             if (clazz.getName().endsWith("Methods")) {
+            	System.err.println(clazz.getName());
                 // check all methods of this *Methods interface
                 for (Method method : clazz.getDeclaredMethods()) {
+                	System.err.println(method.toString());
                     final FacebookMethodsType methodsType = FacebookMethodsType.findMethod(method.getName(), method.getParameterTypes());
                     assertNotNull(methodsType);
                     assertEquals("Methods are not equal", method, methodsType.getMethod());
