@@ -16,6 +16,8 @@
  */
 package org.apache.camel.component.infinispan;
 
+import java.util.concurrent.TimeUnit;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
@@ -50,6 +52,23 @@ public class InfinispanProducerTest extends InfinispanTestSupport {
             public void process(Exchange exchange) throws Exception {
                 exchange.getIn().setHeader(InfinispanConstants.KEY, KEY_ONE);
                 exchange.getIn().setHeader(InfinispanConstants.VALUE, VALUE_ONE);
+                exchange.getIn().setHeader(InfinispanConstants.OPERATION, InfinispanConstants.PUT);
+            }
+        });
+
+        Object value = currentCache().get(KEY_ONE);
+        assertThat(value.toString(), is(VALUE_ONE));
+    }
+    
+    @Test
+    public void publishKeyAndValueWithLifespan() throws Exception {
+        template.send("direct:start", new Processor() {
+            @Override
+            public void process(Exchange exchange) throws Exception {
+                exchange.getIn().setHeader(InfinispanConstants.KEY, KEY_ONE);
+                exchange.getIn().setHeader(InfinispanConstants.VALUE, VALUE_ONE);
+                exchange.getIn().setHeader(InfinispanConstants.LIFESPAN, new Long(10));
+                exchange.getIn().setHeader(InfinispanConstants.TIME_UNIT, TimeUnit.SECONDS.toString());
                 exchange.getIn().setHeader(InfinispanConstants.OPERATION, InfinispanConstants.PUT);
             }
         });

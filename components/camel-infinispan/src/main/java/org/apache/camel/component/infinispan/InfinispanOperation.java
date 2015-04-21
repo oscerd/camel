@@ -16,7 +16,10 @@
  */
 package org.apache.camel.component.infinispan;
 
+import java.util.concurrent.TimeUnit;
+
 import org.apache.camel.Exchange;
+import org.apache.camel.util.ObjectHelper;
 import org.infinispan.commons.api.BasicCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +56,14 @@ public class InfinispanOperation {
         PUT {
             @Override
             void execute(BasicCache<Object, Object> cache, Exchange exchange) {
-                Object result = cache.put(getKey(exchange), getValue(exchange));
+                Object result;
+                if (!ObjectHelper.isEmpty(exchange.getIn().getHeader(InfinispanConstants.LIFESPAN)) && !ObjectHelper.isEmpty(exchange.getIn().getHeader(InfinispanConstants.TIME_UNIT))){
+                    long lifespan = (long) exchange.getIn().getHeader(InfinispanConstants.LIFESPAN);
+                    String timeUnit =  (String) exchange.getIn().getHeader(InfinispanConstants.TIME_UNIT);
+                    result = cache.put(getKey(exchange), getValue(exchange), lifespan, TimeUnit.valueOf(timeUnit));
+                } else {
+                    result = cache.put(getKey(exchange), getValue(exchange));
+                }
                 setResult(result, exchange);
             }
         }, PUTIFABSENT {
