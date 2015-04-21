@@ -75,6 +75,27 @@ public class InfinispanProducerTest extends InfinispanTestSupport {
 
         Object value = currentCache().get(KEY_ONE);
         assertThat(value.toString(), is(VALUE_ONE));
+        
+        Exchange exchange;
+        exchange = template.send("direct:get", new Processor() {
+            @Override
+            public void process(Exchange exchange) throws Exception {
+                exchange.getIn().setHeader(InfinispanConstants.KEY, KEY_ONE);
+            }
+        });
+        String resultGet = exchange.getIn().getHeader(InfinispanConstants.RESULT, String.class);
+        assertEquals(VALUE_ONE, resultGet);
+        
+        Thread.sleep(10000);
+        
+        exchange = template.send("direct:get", new Processor() {
+            @Override
+            public void process(Exchange exchange) throws Exception {
+                exchange.getIn().setHeader(InfinispanConstants.KEY, KEY_ONE);
+            }
+        });
+        resultGet = exchange.getIn().getHeader(InfinispanConstants.RESULT, String.class);
+        assertEquals(null, resultGet);
     }
     
     @Test
