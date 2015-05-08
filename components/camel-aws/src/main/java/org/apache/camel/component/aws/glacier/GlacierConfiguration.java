@@ -36,7 +36,7 @@ public class GlacierConfiguration implements Cloneable {
     @UriParam
     private String secretKey;
     @UriParam
-    private String fileName;
+    private String archiveName;
     @UriParam
     private String prefix;
     @UriParam
@@ -120,12 +120,12 @@ public class GlacierConfiguration implements Cloneable {
         this.vaultName = vaultName;
     }
 
-    public String getFileName() {
-        return fileName;
+    public String getArchiveName() {
+        return archiveName;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
+    public void setArchiveName(String archiveName) {
+        this.archiveName = archiveName;
     }
 
     public String getRegion() {

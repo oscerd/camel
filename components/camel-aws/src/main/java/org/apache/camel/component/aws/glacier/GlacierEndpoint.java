@@ -16,11 +16,12 @@
  */
 package org.apache.camel.component.aws.glacier;
 
+import java.util.List;
+
 import org.apache.camel.Component;
 import org.apache.camel.Consumer;
 import org.apache.camel.Processor;
 import org.apache.camel.Producer;
-import org.apache.camel.component.aws.s3.S3Configuration;
 import org.apache.camel.component.aws.s3.S3Consumer;
 import org.apache.camel.impl.ScheduledPollEndpoint;
 import org.apache.camel.spi.UriEndpoint;
@@ -33,9 +34,10 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.glacier.AmazonGlacierClient;
+import com.amazonaws.services.glacier.model.CreateVaultRequest;
+import com.amazonaws.services.glacier.model.DescribeVaultOutput;
 import com.amazonaws.services.glacier.model.ListVaultsRequest;
 import com.amazonaws.services.glacier.model.ListVaultsResult;
-import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CreateBucketRequest;
 import com.amazonaws.services.s3.model.ListObjectsRequest;
 
@@ -93,6 +95,40 @@ public class GlacierEndpoint extends ScheduledPollEndpoint {
         return glacierClient;
     }
     
+    @Override
+    public void doStart() throws Exception {
+        super.doStart();
+
+        glacierClient = configuration.getAmazonGlacierClient() != null
+            ? configuration.getAmazonGlacierClient() : createGlacierClient();
+        
+        if (ObjectHelper.isNotEmpty(configuration.getAmazonGlacierEndpoint())) {
+            glacierClient.setEndpoint(configuration.getAmazonGlacierEndpoint());
+        }
+        
+        String archiveName = getConfiguration().getArchiveName();
+
+        String vaultName = getConfiguration().getVaultName();
+        LOG.trace("Querying whether vault [{}] already exists...", vaultName);
+        
+        boolean vaultExist = listVaults(glacierClient, vaultName);
+        
+        if (vaultExist) {
+        	return;
+        } 
+        
+        LOG.trace("Vault [{}] doesn't exist yet", vaultName);
+        
+        // creates the new bucket because it doesn't exist yet
+        CreateVaultRequest createVaultRequest = new CreateVaultRequest(vaultName);
+        
+        LOG.trace("Creating Vault [{}] with request [{}]...", new Object[]{configuration.getVaultName(), createVaultRequest});
+        
+        glacierClient.createVault(createVaultRequest);
+        
+        LOG.trace("Vault created");
+    }
+    
     /**
      * Provide the possibility to override this method for an mock implementation
      *
@@ -111,4 +147,14 @@ public class GlacierEndpoint extends ScheduledPollEndpoint {
     public void setMaxMessagesPerPoll(int maxMessagesPerPoll) {
         this.maxMessagesPerPoll = maxMessagesPerPoll;
     }
+    
+	private boolean listVaults(AmazonGlacierClient client, String vaultName) {
+		ListVaultsRequest listVaultsRequest = new ListVaultsRequest();
+		ListVaultsResult listVaultsResult = client.listVaults(listVaultsRequest);
+		List<DescribeVaultOutput> vaultList = listVaultsResult.getVaultList();
+		for (DescribeVaultOutput vault : vaultList) {
+			if (vault.getVaultName().equalsIgnoreCase(vaultName)) return true;
+		}
+		return false;
+	}
 }
