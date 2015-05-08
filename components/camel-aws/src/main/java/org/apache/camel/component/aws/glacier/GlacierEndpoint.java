@@ -43,7 +43,7 @@ import com.amazonaws.services.s3.model.ListObjectsRequest;
 /**
  * Defines the <a href="http://camel.apache.org/aws.html">AWS Glacier Endpoint</a>.  
  */
-@UriEndpoint(scheme = "aws-glacier", title = "AWS Glacier Storage Service", syntax = "aws-glacier:bucketName", consumerClass = S3Consumer.class, label = "cloud,file")
+@UriEndpoint(scheme = "aws-glacier", title = "AWS Glacier Storage Service", syntax = "aws-glacier:vaultName", consumerClass = S3Consumer.class, label = "cloud,file")
 public class GlacierEndpoint extends ScheduledPollEndpoint {
 
     private static final Logger LOG = LoggerFactory.getLogger(GlacierEndpoint.class);
