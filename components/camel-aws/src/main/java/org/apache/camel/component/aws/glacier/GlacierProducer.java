@@ -79,7 +79,7 @@ public class GlacierProducer extends DefaultProducer {
     }
     
     public void processSingleOp(final Exchange exchange) throws Exception {
-
+         System.err.println("Processing single");
     	 File file = new File(getConfiguration().getArchiveName());
     	 InputStream is = new FileInputStream(file);
     	 byte[] body = new byte[(int) file.length()];

@@ -100,7 +100,7 @@ public class GlacierConfiguration implements Cloneable {
         return amazonGlacierClient;
     }
 
-    public void setAmazonS3Client(AmazonGlacierClient amazonGlacierClient) {
+    public void setAmazonGlacierClient(AmazonGlacierClient amazonGlacierClient) {
         this.amazonGlacierClient = amazonGlacierClient;
     }
 

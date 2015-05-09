@@ -23,6 +23,7 @@ import org.apache.camel.Consumer;
 import org.apache.camel.Processor;
 import org.apache.camel.Producer;
 import org.apache.camel.component.aws.s3.S3Consumer;
+import org.apache.camel.component.aws.s3.S3Producer;
 import org.apache.camel.impl.ScheduledPollEndpoint;
 import org.apache.camel.spi.UriEndpoint;
 import org.apache.camel.spi.UriParam;
@@ -64,8 +65,7 @@ public class GlacierEndpoint extends ScheduledPollEndpoint {
     
 	@Override
 	public Producer createProducer() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return new GlacierProducer(this);
 	}
 
 	@Override
