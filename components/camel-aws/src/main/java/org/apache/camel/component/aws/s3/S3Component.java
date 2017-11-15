@@ -19,17 +19,24 @@ package org.apache.camel.component.aws.s3;
 import java.util.Map;
 
 import org.apache.camel.CamelContext;
+import org.apache.camel.ComponentVerifier;
 import org.apache.camel.Endpoint;
+import org.apache.camel.VerifiableComponent;
+import org.apache.camel.component.aws.common.AwsComponentVerifierExtension;
+import org.apache.camel.component.extension.ComponentVerifierExtension;
+import org.apache.camel.impl.DefaultComponent;
 import org.apache.camel.impl.UriEndpointComponent;
 
-public class S3Component extends UriEndpointComponent {
+public class S3Component extends DefaultComponent implements VerifiableComponent{
     
     public S3Component() {
-        super(S3Endpoint.class);
+        super();
     }
 
     public S3Component(CamelContext context) {
-        super(context, S3Endpoint.class);
+        super(context);
+        
+        registerExtension(new AwsComponentVerifierExtension());
     }
 
     protected Endpoint createEndpoint(String uri, String remaining, Map<String, Object> parameters) throws Exception {
@@ -52,4 +59,9 @@ public class S3Component extends UriEndpointComponent {
         setProperties(endpoint, parameters);
         return endpoint;
     }
+
+	@Override
+	public ComponentVerifier getVerifier() {
+		return (scope, parameters) -> getExtension(ComponentVerifierExtension.class).orElseThrow(UnsupportedOperationException::new).verify(scope, parameters);
+	}
 }
