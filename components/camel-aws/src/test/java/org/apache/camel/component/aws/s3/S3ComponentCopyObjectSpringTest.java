@@ -56,6 +56,7 @@ public class S3ComponentCopyObjectSpringTest extends CamelSpringTestSupport {
     }
     
     private void assertResultExchange(Exchange resultExchange) {
+        System.err.println(resultExchange.getIn().getHeaders().toString());
         assertEquals(resultExchange.getIn().getHeader(S3Constants.VERSION_ID), "11192828ahsh2723");
         assertNull(resultExchange.getIn().getHeader(S3Constants.LAST_MODIFIED));
         assertEquals(resultExchange.getIn().getHeader(S3Constants.E_TAG), "3a5c8b1ad448bca04584ecb55b836264");

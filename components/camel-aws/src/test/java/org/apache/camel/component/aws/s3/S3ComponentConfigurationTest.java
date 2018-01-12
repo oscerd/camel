@@ -144,6 +144,18 @@ public class S3ComponentConfigurationTest extends CamelTestSupport {
     }
     
     @Test
+    public void createEndpointWithComponentElements() throws Exception {
+        S3Component component = new S3Component(context);
+        component.setAccessKey("XXX");
+        component.setSecretKey("YYY");
+        S3Endpoint endpoint = (S3Endpoint)component.createEndpoint("aws-s3://MyBucket");
+        
+        assertEquals("MyBucket", endpoint.getConfiguration().getBucketName());
+        assertEquals("XXX", endpoint.getConfiguration().getAccessKey());
+        assertEquals("YYY", endpoint.getConfiguration().getSecretKey());
+    }
+    
+    @Test
     public void createEndpointWithoutSecretKeyAndAccessKeyConfiguration() throws Exception {
         AmazonS3ClientMock mock = new AmazonS3ClientMock();
         
