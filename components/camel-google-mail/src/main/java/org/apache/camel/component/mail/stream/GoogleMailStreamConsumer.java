@@ -35,6 +35,7 @@ import com.google.api.services.gmail.model.Label;
 import com.google.api.services.gmail.model.ListLabelsResponse;
 import com.google.api.services.gmail.model.ListMessagesResponse;
 import com.google.api.services.gmail.model.Message;
+import com.google.api.services.gmail.model.MessagePartHeader;
 import com.google.api.services.gmail.model.ModifyMessageRequest;
 
 /**
@@ -65,6 +66,10 @@ public class GoogleMailStreamConsumer extends ScheduledBatchPollingConsumer {
 		Message mess = getClient().users().messages().get("me", c.getMessages().get(0).getId()).setFormat("FULL").execute();
         byte[] bodyBytes = Base64.decodeBase64(mess.getPayload().getParts().get(0).getBody().getData().trim().toString()); // get body
         String body = new String(bodyBytes, "UTF-8");
+        for(MessagePartHeader header:mess.getPayload().getHeaders()){
+            System.err.println("name " + header.getName());
+            System.err.println("value " + header.getValue());
+            }
         List<String> labels = new ArrayList<String>();
         String unreadId = null;
         ListLabelsResponse listResponse = getClient().users().labels().list("me").execute();
