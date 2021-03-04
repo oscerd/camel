@@ -53,25 +53,27 @@ public abstract class EndpointUriFactorySupport implements CamelContextAware, En
             throw new IllegalArgumentException(
                     "Option " + name + " is required when creating endpoint uri with syntax " + syntax);
         }
+        int schemeEndPosition = syntax.indexOf(":", 0);
+        String subUri = uri.substring(schemeEndPosition);
         if (ObjectHelper.isNotEmpty(obj)) {
             String str = camelContext.getTypeConverter().convertTo(String.class, obj);
-            uri = uri.replace(name, str);
+            subUri = subUri.replace(name, str);
         } else {
             // the option is optional and we have no default or value for it, so we need to remove it from the syntax
-            int pos = uri.indexOf(name);
+            int pos = subUri.indexOf(name);
             if (pos != -1) {
                 // remove from syntax
-                uri = uri.replaceFirst(name, "");
+                subUri = subUri.replaceFirst(name, "");
                 pos = pos - 1;
                 // remove the separator char
-                char ch = uri.charAt(pos);
+                char ch = subUri.charAt(pos);
                 if (!Character.isLetterOrDigit(ch)) {
-                    uri = uri.substring(0, pos) + uri.substring(pos + 1);
+                    subUri = subUri.substring(0, pos) + subUri.substring(pos + 1);
                 }
             }
         }
 
-        return uri;
+        return uri + subUri;
     }
 
     protected String buildQueryParameters(String uri, Map<String, Object> parameters, boolean encode)
