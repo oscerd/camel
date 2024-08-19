@@ -37,3 +37,48 @@ updates:
     directory: "docs"
     schedule:
        interval: "weekly"
+
+  - package-ecosystem: cargo
+    directory: /components/camel-wasm/src/test/rust
+    schedule:
+      interval: daily
+
+  - package-ecosystem: maven
+    directory: /apache-camel
+    schedule:
+      interval: daily
+
+  - package-ecosystem: maven
+    directory: /archetypes
+    schedule:
+      interval: daily
+
+  - package-ecosystem: maven
+    directory: /bom
+    schedule:
+      interval: daily
+
+  - package-ecosystem: maven
+    directory: /buildingtools
+    schedule:
+      interval: daily
+
+  - package-ecosystem: maven
+    directory: /camel-dependencies
+    schedule:
+      interval: daily
+
+  - package-ecosystem: maven
+    directory: /catalog
+    schedule:
+      interval: daily
+
+  - package-ecosystem: maven
+    directory: /components
+    schedule:
+      interval: daily
+
+  - package-ecosystem: maven
+    directory: /core
+    schedule:
+      interval: daily
