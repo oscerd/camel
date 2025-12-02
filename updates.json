@@ -1,0 +1,275 @@
+[
+  {
+    "property": "aws.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-aws-v2/src/main/resources/org/apache/camel/test/infra/aws2/services/container.properties",
+    "old_version": "4.9.2",
+    "new_version": "stable",
+    "image_name": "mirror.gcr.io/localstack/localstack"
+  },
+  {
+    "property": "azure.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-azure-common/src/main/resources/org/apache/camel/test/infra/azure/common/services/container.properties",
+    "old_version": "3.35.0",
+    "new_version": "table-alpha.1",
+    "image_name": "mcr.microsoft.com/azure-storage/azurite"
+  },
+  {
+    "property": "consul.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-consul/src/main/resources/org/apache/camel/test/infra/consul/services/container.properties",
+    "old_version": "1.21",
+    "new_version": "1.22",
+    "image_name": "mirror.gcr.io/hashicorp/consul"
+  },
+  {
+    "property": "couchbase.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-couchbase/src/main/resources/org/apache/camel/test/infra/couchbase/services/container.properties",
+    "old_version": "7.6.2",
+    "new_version": "enterprise-7.6.8",
+    "image_name": "mirror.gcr.io/couchbase/server"
+  },
+  {
+    "property": "couchdb.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-couchdb/src/main/resources/org/apache/camel/test/infra/couchdb/services/container.properties",
+    "old_version": "2.3.1",
+    "new_version": "3.5.0",
+    "image_name": "mirror.gcr.io/couchdb"
+  },
+  {
+    "property": "docling.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-docling/src/main/resources/org/apache/camel/test/infra/docling/services/container.properties",
+    "old_version": "v1.6.0",
+    "new_version": "v1.9.0",
+    "image_name": "quay.io/docling-project/docling-serve"
+  },
+  {
+    "property": "fhir.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-fhir/src/main/resources/org/apache/camel/test/infra/fhir/services/container.properties",
+    "old_version": "v8.2.0-2",
+    "new_version": "v8.6.0-1-tomcat",
+    "image_name": "mirror.gcr.io/hapiproject/hapi"
+  },
+  {
+    "property": "google.pubsub.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-google-pubsub/src/main/resources/org/apache/camel/test/infra/google/pubsub/services/container.properties",
+    "old_version": "emulators",
+    "new_version": "stable",
+    "image_name": "gcr.io/google.com/cloudsdktool/cloud-sdk"
+  },
+  {
+    "property": "hashicorp.vault.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-hashicorp-vault/src/main/resources/org/apache/camel/test/infra/hashicorp/vault/services/container.properties",
+    "old_version": "1.20.4",
+    "new_version": "1.21.1",
+    "image_name": "mirror.gcr.io/hashicorp/vault"
+  },
+  {
+    "property": "hashicorp.vault.container.ppc64le",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-hashicorp-vault/src/main/resources/org/apache/camel/test/infra/hashicorp/vault/services/container.properties",
+    "old_version": "v1.13.1",
+    "new_version": "v1.14.8",
+    "image_name": "icr.io/ppc64le-oss/vault-ppc64le"
+  },
+  {
+    "property": "ibm.mq.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-ibmmq/src/main/resources/org/apache/camel/test/infra/ibmmq/services/container.properties",
+    "old_version": "9.3.2.0-r2",
+    "new_version": "9.4.4.0-r3-s390x",
+    "image_name": "icr.io/ibm-messaging/mq"
+  },
+  {
+    "property": "infinispan.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-infinispan/src/main/resources/org/apache/camel/test/infra/infinispan/services/container.properties",
+    "old_version": "16.0.1",
+    "new_version": "16.0.3",
+    "image_name": "quay.io/infinispan/server"
+  },
+  {
+    "property": "kafka3.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-kafka/src/main/resources/org/apache/camel/test/infra/kafka/services/container.properties",
+    "old_version": "3.9.1",
+    "new_version": "4.1.1",
+    "image_name": "mirror.gcr.io/apache/kafka"
+  },
+  {
+    "property": "redpanda.container.image",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-kafka/src/main/resources/org/apache/camel/test/infra/kafka/services/container.properties",
+    "old_version": "v24.1.16",
+    "new_version": "v25.3.1",
+    "image_name": "mirror.gcr.io/redpandadata/redpanda"
+  },
+  {
+    "property": "strimzi.container.image",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-kafka/src/main/resources/org/apache/camel/test/infra/kafka/services/container.properties",
+    "old_version": "latest-kafka-3.9.1",
+    "new_version": "sha256-ffcba1ad2bdff39f0b59a935990617d539cc9a29720e44168a8cdd021c0a05b5.sig",
+    "image_name": "quay.io/strimzi/kafka"
+  },
+  {
+    "property": "confluent.container.image",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-kafka/src/main/resources/org/apache/camel/test/infra/kafka/services/container.properties",
+    "old_version": "7.9.2",
+    "new_version": "latest-ubi9",
+    "image_name": "mirror.gcr.io/confluentinc/cp-kafka"
+  },
+  {
+    "property": "keycloak.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-keycloak/src/main/resources/org/apache/camel/test/infra/keycloak/services/container.properties",
+    "old_version": "26.3.5",
+    "new_version": "nightly",
+    "image_name": "mirror.gcr.io/keycloak/keycloak"
+  },
+  {
+    "property": "microprofile.lra.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-microprofile-lra/src/main/resources/org/apache/camel/test/infra/microprofile/lra/services/container.properties",
+    "old_version": "5.13.1.Final-2.16.6.Final",
+    "new_version": "7.2.2.Final-3.29.3",
+    "image_name": "quay.io/jbosstm/lra-coordinator"
+  },
+  {
+    "property": "milvus.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-milvus/src/main/resources/org/apache/camel/test/infra/milvus/services/container.properties",
+    "old_version": "v2.5.11",
+    "new_version": "v2.6.6",
+    "image_name": "mirror.gcr.io/milvusdb/milvus"
+  },
+  {
+    "property": "milvus.container.ppc64le",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-milvus/src/main/resources/org/apache/camel/test/infra/milvus/services/container.properties",
+    "old_version": "v2.4.11",
+    "new_version": "v2.5.3",
+    "image_name": "icr.io/ppc64le-oss/milvus-ppc64le"
+  },
+  {
+    "property": "minio.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-minio/src/main/resources/org/apache/camel/test/infra/minio/services/container.properties",
+    "old_version": "RELEASE.2025-07-23T15-54-02Z-cpuv1",
+    "new_version": "latest-cicd",
+    "image_name": "mirror.gcr.io/minio/minio"
+  },
+  {
+    "property": "mongodb.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-mongodb/src/main/resources/org/apache/camel/test/infra/mongodb/services/container.properties",
+    "old_version": "7.0.12-jammy",
+    "new_version": "8.0.9-noble",
+    "image_name": "mirror.gcr.io/mongo"
+  },
+  {
+    "property": "mongodb.container.ppc64le",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-mongodb/src/main/resources/org/apache/camel/test/infra/mongodb/services/container.properties",
+    "old_version": "4.4.24",
+    "new_version": "6.0.13-bv",
+    "image_name": "icr.io/ppc64le-oss/mongodb-ppc64le"
+  },
+  {
+    "property": "mosquitto.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-mosquitto/src/main/resources/org/apache/camel/test/infra/mosquitto/services/container.properties",
+    "old_version": "2.0.18",
+    "new_version": "2.0.22",
+    "image_name": "mirror.gcr.io/eclipse-mosquitto"
+  },
+  {
+    "property": "nats.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-nats/src/main/resources/org/apache/camel/test/infra/nats/services/container.properties",
+    "old_version": "2.11.6",
+    "new_version": "2.12.2",
+    "image_name": "mirror.gcr.io/nats"
+  },
+  {
+    "property": "neo4j.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-neo4j/src/main/resources/org/apache/camel/test/infra/neo4j/services/container.properties",
+    "old_version": "5.26-community-ubi9",
+    "new_version": "5.26.17-ubi9",
+    "image_name": "mirror.gcr.io/neo4j"
+  },
+  {
+    "property": "ollama.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-ollama/src/main/resources/org/apache/camel/test/infra/ollama/services/container.properties",
+    "old_version": "0.12.5",
+    "new_version": "rocm",
+    "image_name": "mirror.gcr.io/ollama/ollama"
+  },
+  {
+    "property": "openldap.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-openldap/src/main/resources/org/apache/camel/test/infra/openldap/services/container.properties",
+    "old_version": "1.5.0",
+    "new_version": "stable",
+    "image_name": "mirror.gcr.io/osixia/openldap"
+  },
+  {
+    "property": "opensearch.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-opensearch/src/main/resources/org/apache/camel/test/infra/opensearch/services/container.properties",
+    "old_version": "3.3.1",
+    "new_version": "3.3.2",
+    "image_name": "mirror.gcr.io/opensearchproject/opensearch"
+  },
+  {
+    "property": "postgres.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-postgres/src/main/resources/org/apache/camel/test/infra/postgres/services/container.properties",
+    "old_version": "17.5-alpine",
+    "new_version": "trixie",
+    "image_name": "mirror.gcr.io/postgres"
+  },
+  {
+    "property": "qdrant.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-qdrant/src/main/resources/org/apache/camel/test/infra/qdrant/services/container.properties",
+    "old_version": "v1.15.1-unprivileged",
+    "new_version": "v1.9.7-unprivileged",
+    "image_name": "mirror.gcr.io/qdrant/qdrant"
+  },
+  {
+    "property": "rabbitmq.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-rabbitmq/src/main/resources/org/apache/camel/test/infra/rabbitmq/services/container.properties",
+    "old_version": "4.1.2-management",
+    "new_version": "management",
+    "image_name": "mirror.gcr.io/rabbitmq"
+  },
+  {
+    "property": "redis.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-redis/src/main/resources/org/apache/camel/test/infra/redis/services/container.properties",
+    "old_version": "7.4.0-alpine",
+    "new_version": "alpine3.21",
+    "image_name": "mirror.gcr.io/redis"
+  },
+  {
+    "property": "tensorflow.serving.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-tensorflow-serving/src/test/resources/org/apache/camel/test/infra/tensorflow/serving/services/container.properties",
+    "old_version": "2.18.0",
+    "new_version": "latest-gpu",
+    "image_name": "mirror.gcr.io/tensorflow/serving"
+  },
+  {
+    "property": "tensorflow.serving.container.ppc64le",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-tensorflow-serving/src/test/resources/org/apache/camel/test/infra/tensorflow/serving/services/container.properties",
+    "old_version": "1.6.2-tensorflow-serving-ubuntu18.04-py37-ppc64le-21.036",
+    "new_version": "1.7.0-xgboost-ubuntu18.04-py37-x86_64-20.335",
+    "image_name": "ibmcom/powerai"
+  },
+  {
+    "property": "torchserve.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-torchserve/src/main/resources/org/apache/camel/test/infra/torchserve/services/container.properties",
+    "old_version": "0.12.0-cpu",
+    "new_version": "latest-gpu",
+    "image_name": "mirror.gcr.io/pytorch/torchserve"
+  },
+  {
+    "property": "weaviate.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-weaviate/src/main/resources/org/apache/camel/test/infra/weaviate/services/container.properties",
+    "old_version": "1.32.0",
+    "new_version": "very-long-classification-timeouts",
+    "image_name": "cr.weaviate.io/semitechnologies/weaviate"
+  },
+  {
+    "property": "zookeeper.container",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-zookeeper/src/main/resources/org/apache/camel/test/infra/zookeeper/services/container.properties",
+    "old_version": "3.9",
+    "new_version": "3.9.3",
+    "image_name": "mirror.gcr.io/zookeeper"
+  },
+  {
+    "property": "zookeeper.container.ppc64le",
+    "file": "/home/runner/work/camel/camel/test-infra/camel-test-infra-zookeeper/src/main/resources/org/apache/camel/test/infra/zookeeper/services/container.properties",
+    "old_version": "3.5.10",
+    "new_version": "v3.9.3-debian-12-r19-bv",
+    "image_name": "icr.io/ppc64le-oss/zookeeper-ppc64le"
+  }
+]

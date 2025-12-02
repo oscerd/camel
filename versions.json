@@ -1,0 +1,1585 @@
+[
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "",
+      "name": "arangodb",
+      "current_version": "3.12.5.2",
+      "property_name": "arangodb.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-arangodb/src/main/resources/org/apache/camel/test/infra/arangodb/services/container.properties"
+    },
+    "available_versions": [
+      "3.12.0"
+    ],
+    "latest_version": "3.12.0",
+    "newer_versions": [],
+    "is_latest": true,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "quay.io",
+      "namespace": "artemiscloud",
+      "name": "activemq-artemis-broker",
+      "current_version": "latest",
+      "property_name": "artemis.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-artemis/src/main/resources/org/apache/camel/test/infra/artemis/services/container.properties"
+    },
+    "available_versions": [
+      "dev.latest",
+      "artemis.2.38.0",
+      "artemis.2.37.0",
+      "artemis.2.36.0",
+      "artemis.2.35.0",
+      "artemis.2.34.0",
+      "artemis.2.33.0",
+      "artemis.2.32.0",
+      "artemis.2.31.2",
+      "artemis.2.31.0"
+    ],
+    "latest_version": "dev.latest",
+    "newer_versions": [],
+    "is_latest": true,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "icr.io",
+      "namespace": "ppc64le-oss",
+      "name": "activemq-artemis-broker-ppc64le",
+      "current_version": "2.0.2",
+      "property_name": "artemis.container.ppc64le",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-artemis/src/main/resources/org/apache/camel/test/infra/artemis/services/container.properties"
+    },
+    "available_versions": [
+      "2.0.2"
+    ],
+    "latest_version": "2.0.2",
+    "newer_versions": [],
+    "is_latest": true,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "localstack",
+      "name": "localstack",
+      "current_version": "4.9.2",
+      "property_name": "aws.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-aws-v2/src/main/resources/org/apache/camel/test/infra/aws2/services/container.properties"
+    },
+    "available_versions": [
+      "stable",
+      "s3-latest",
+      "4.9.2",
+      "4.9",
+      "4.8.1",
+      "4.8.0",
+      "4.8",
+      "4.7.0",
+      "4.6.0",
+      "4.5.0"
+    ],
+    "latest_version": "stable",
+    "newer_versions": [
+      "stable",
+      "s3-latest",
+      "4.11.1",
+      "4.11",
+      "4.10.0"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mcr.microsoft.com",
+      "namespace": "azure-storage",
+      "name": "azurite",
+      "current_version": "3.35.0",
+      "property_name": "azure.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-azure-common/src/main/resources/org/apache/camel/test/infra/azure/common/services/container.properties"
+    },
+    "available_versions": [
+      "table-alpha.1",
+      "alpha",
+      "3.9.0-table-alpha.1",
+      "3.9.0",
+      "3.8.0",
+      "3.7.0",
+      "3.6.0",
+      "3.5.0",
+      "3.4.0",
+      "3.35.0-arm64"
+    ],
+    "latest_version": "table-alpha.1",
+    "newer_versions": [
+      "table-alpha.1",
+      "alpha",
+      "3.9.0-table-alpha.1",
+      "3.35.0-arm64",
+      "3.35.0-amd64"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "",
+      "name": "cassandra",
+      "current_version": "5.0.2",
+      "property_name": "cassandra.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-cassandra/src/main/resources/org/apache/camel/test/infra/cassandra/services/container.properties"
+    },
+    "available_versions": [
+      "5.0.2",
+      "4.1.3",
+      "4.0.4",
+      "3.11.9",
+      "3.11.2"
+    ],
+    "latest_version": "5.0.2",
+    "newer_versions": [],
+    "is_latest": true,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "claytantor",
+      "name": "chatscript-docker",
+      "current_version": "latest",
+      "property_name": "chatscript.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-chatscript/src/main/resources/org/apache/camel/test/infra/chatscript/services/container.properties"
+    },
+    "available_versions": [],
+    "latest_version": null,
+    "newer_versions": [],
+    "is_latest": true,
+    "error": "No versions found in registry"
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "hashicorp",
+      "name": "consul",
+      "current_version": "1.21",
+      "property_name": "consul.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-consul/src/main/resources/org/apache/camel/test/infra/consul/services/container.properties"
+    },
+    "available_versions": [
+      "1.22",
+      "1.22.0",
+      "1.21.5",
+      "1.21.4",
+      "1.21.3",
+      "1.21.2",
+      "1.21.1",
+      "1.21",
+      "1.21.0",
+      "1.20.6"
+    ],
+    "latest_version": "1.22",
+    "newer_versions": [
+      "1.22",
+      "1.22.0",
+      "1.21.5",
+      "1.21.4",
+      "1.21.3"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "icr.io",
+      "namespace": "ppc64le-oss",
+      "name": "consul-ppc64le",
+      "current_version": "1.9.4",
+      "property_name": "consul.container.ppc64le",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-consul/src/main/resources/org/apache/camel/test/infra/consul/services/container.properties"
+    },
+    "available_versions": [
+      "1.9.4",
+      "1.1.28"
+    ],
+    "latest_version": "1.9.4",
+    "newer_versions": [],
+    "is_latest": true,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "couchbase",
+      "name": "server",
+      "current_version": "7.6.2",
+      "property_name": "couchbase.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-couchbase/src/main/resources/org/apache/camel/test/infra/couchbase/services/container.properties"
+    },
+    "available_versions": [
+      "enterprise-7.6.8",
+      "enterprise-7.6.7",
+      "enterprise-7.2.4",
+      "community-7.2.4",
+      "community-7.0.0",
+      "8.0.0",
+      "7.6.4",
+      "7.6.2",
+      "7.6.0",
+      "7.2.5"
+    ],
+    "latest_version": "enterprise-7.6.8",
+    "newer_versions": [
+      "enterprise-7.6.8",
+      "enterprise-7.6.7",
+      "enterprise-7.2.4",
+      "community-7.2.4",
+      "community-7.0.0"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "",
+      "name": "couchdb",
+      "current_version": "2.3.1",
+      "property_name": "couchdb.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-couchdb/src/main/resources/org/apache/camel/test/infra/couchdb/services/container.properties"
+    },
+    "available_versions": [
+      "3.5.0",
+      "2.3.1"
+    ],
+    "latest_version": "3.5.0",
+    "newer_versions": [
+      "3.5.0"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "ppc64le",
+      "name": "couchdb",
+      "current_version": "2.3.1",
+      "property_name": "couchdb.container.ppc64le",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-couchdb/src/main/resources/org/apache/camel/test/infra/couchdb/services/container.properties"
+    },
+    "available_versions": [
+      "2.3.1"
+    ],
+    "latest_version": "2.3.1",
+    "newer_versions": [],
+    "is_latest": true,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "quay.io",
+      "namespace": "docling-project",
+      "name": "docling-serve",
+      "current_version": "v1.6.0",
+      "property_name": "docling.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-docling/src/main/resources/org/apache/camel/test/infra/docling/services/container.properties"
+    },
+    "available_versions": [
+      "v1.9.0",
+      "v1.8.0",
+      "v1.7.2",
+      "v1.7.1",
+      "v1.7.0",
+      "v1.6.0",
+      "v1.5.1",
+      "v1.5.0",
+      "v1.4.1",
+      "v1.3.1"
+    ],
+    "latest_version": "v1.9.0",
+    "newer_versions": [
+      "v1.9.0",
+      "v1.8.0",
+      "v1.7.2",
+      "v1.7.1",
+      "v1.7.0"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "docker.elastic.co",
+      "namespace": "elasticsearch",
+      "name": "elasticsearch",
+      "current_version": "9.1.0",
+      "property_name": "elasticsearch.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-elasticsearch/src/main/resources/org/apache/camel/test/infra/elasticsearch/services/container.properties"
+    },
+    "available_versions": [],
+    "latest_version": null,
+    "newer_versions": [],
+    "is_latest": false,
+    "error": "Elastic Registry API error: 401 Client Error: Unauthorized for url: https://docker.elastic.co/v2/elasticsearch/elasticsearch/tags/list"
+  },
+  {
+    "image": {
+      "registry": "icr.io",
+      "namespace": "ppc64le-oss",
+      "name": "elasticsearch-ppc64le",
+      "current_version": "8.3.3",
+      "property_name": "elasticsearch.container.ppc64le",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-elasticsearch/src/main/resources/org/apache/camel/test/infra/elasticsearch/services/container.properties"
+    },
+    "available_versions": [
+      "8.3.3",
+      "v8.1.0",
+      "7.17.28",
+      "7.17.20",
+      "7.17.14",
+      "7.17.13",
+      "7.17.10",
+      "7.17.3",
+      "7.16.3",
+      "7.12.0"
+    ],
+    "latest_version": "8.3.3",
+    "newer_versions": [],
+    "is_latest": true,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "hapiproject",
+      "name": "hapi",
+      "current_version": "v8.2.0-2",
+      "property_name": "fhir.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-fhir/src/main/resources/org/apache/camel/test/infra/fhir/services/container.properties"
+    },
+    "available_versions": [
+      "v8.6.0-1-tomcat",
+      "v8.6.0-1",
+      "v8.4.0-3",
+      "v8.2.0-2",
+      "v7.6.0",
+      "v7.4.0",
+      "v7.2.0"
+    ],
+    "latest_version": "v8.6.0-1-tomcat",
+    "newer_versions": [
+      "v8.6.0-1-tomcat",
+      "v8.6.0-1",
+      "v8.4.0-3"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "gcr.io",
+      "namespace": "google.com/cloudsdktool",
+      "name": "cloud-sdk",
+      "current_version": "emulators",
+      "property_name": "google.pubsub.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-google-pubsub/src/main/resources/org/apache/camel/test/infra/google/pubsub/services/container.properties"
+    },
+    "available_versions": [
+      "stable",
+      "slim",
+      "emulators",
+      "debian_component_based",
+      "alpine",
+      "548.0.0-stable-20251118",
+      "548.0.0-stable",
+      "548.0.0-slim-20251118",
+      "548.0.0-slim",
+      "548.0.0-emulators-20251118"
+    ],
+    "latest_version": "stable",
+    "newer_versions": [
+      "stable",
+      "slim"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "hashicorp",
+      "name": "vault",
+      "current_version": "1.20.4",
+      "property_name": "hashicorp.vault.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-hashicorp-vault/src/main/resources/org/apache/camel/test/infra/hashicorp/vault/services/container.properties"
+    },
+    "available_versions": [
+      "1.21.1",
+      "1.21",
+      "1.21.0",
+      "1.21.0-rc1",
+      "1.20.4",
+      "1.20.3",
+      "1.20.2",
+      "1.20.1",
+      "1.20",
+      "1.20.0"
+    ],
+    "latest_version": "1.21.1",
+    "newer_versions": [
+      "1.21.1",
+      "1.21",
+      "1.21.0"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "icr.io",
+      "namespace": "ppc64le-oss",
+      "name": "vault-ppc64le",
+      "current_version": "v1.13.1",
+      "property_name": "hashicorp.vault.container.ppc64le",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-hashicorp-vault/src/main/resources/org/apache/camel/test/infra/hashicorp/vault/services/container.properties"
+    },
+    "available_versions": [
+      "v1.14.8",
+      "v1.14.4",
+      "v1.13.4",
+      "v1.13.1",
+      "v1.9.9",
+      "v1.9.1",
+      "v1.5.3"
+    ],
+    "latest_version": "v1.14.8",
+    "newer_versions": [
+      "v1.14.8",
+      "v1.14.4",
+      "v1.13.4"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "hivemq",
+      "name": "hivemq-ce",
+      "current_version": "2024.6",
+      "property_name": "hivemq.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-hivemq/src/main/resources/org/apache/camel/test/infra/hivemq/services/container.properties"
+    },
+    "available_versions": [
+      "2024.3"
+    ],
+    "latest_version": "2024.3",
+    "newer_versions": [],
+    "is_latest": true,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "localhost",
+      "namespace": "",
+      "name": "hivemq-ce-sparkplug-tck",
+      "current_version": "camel",
+      "property_name": "hivemq.sparkplug.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-hivemq/src/main/resources/org/apache/camel/test/infra/hivemq/services/container.properties"
+    },
+    "available_versions": [],
+    "latest_version": null,
+    "newer_versions": [],
+    "is_latest": false,
+    "error": "Unsupported registry: localhost"
+  },
+  {
+    "image": {
+      "registry": "icr.io",
+      "namespace": "ibm-messaging",
+      "name": "mq",
+      "current_version": "9.3.2.0-r2",
+      "property_name": "ibm.mq.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-ibmmq/src/main/resources/org/apache/camel/test/infra/ibmmq/services/container.properties"
+    },
+    "available_versions": [
+      "9.4.4.0-r3-s390x",
+      "9.4.4.0-r3-ppc64le",
+      "9.4.4.0-r3-amd64",
+      "9.4.4.0-r3",
+      "9.4.4.0-r2-s390x",
+      "9.4.4.0-r2-ppc64le",
+      "9.4.4.0-r2-amd64",
+      "9.4.4.0-r2",
+      "9.4.4.0-r1-s390x",
+      "9.4.4.0-r1-ppc64le"
+    ],
+    "latest_version": "9.4.4.0-r3-s390x",
+    "newer_versions": [
+      "9.4.4.0-r3-s390x",
+      "9.4.4.0-r3-ppc64le",
+      "9.4.4.0-r3-amd64",
+      "9.4.4.0-r3",
+      "9.4.4.0-r2-s390x"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "quay.io",
+      "namespace": "infinispan",
+      "name": "server",
+      "current_version": "16.0.1",
+      "property_name": "infinispan.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-infinispan/src/main/resources/org/apache/camel/test/infra/infinispan/services/container.properties"
+    },
+    "available_versions": [
+      "16.0.3",
+      "16.0.2",
+      "16.0.1",
+      "16.0.0.dev08",
+      "16.0",
+      "16.0",
+      "16.0",
+      "15.2.6.Final-1",
+      "15.2.6.Final",
+      "15.2.5.Final-1"
+    ],
+    "latest_version": "16.0.3",
+    "newer_versions": [
+      "16.0.3",
+      "16.0.2"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "apache",
+      "name": "kafka",
+      "current_version": "3.9.1",
+      "property_name": "kafka3.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-kafka/src/main/resources/org/apache/camel/test/infra/kafka/services/container.properties"
+    },
+    "available_versions": [
+      "4.1.1",
+      "4.1.1-rc2",
+      "4.1.0",
+      "4.0.1",
+      "4.0.1-rc2",
+      "4.0.0",
+      "3.9.1",
+      "3.9.0",
+      "3.8.1",
+      "3.8.0"
+    ],
+    "latest_version": "4.1.1",
+    "newer_versions": [
+      "4.1.1",
+      "4.1.0",
+      "4.0.1",
+      "4.0.0"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "redpandadata",
+      "name": "redpanda",
+      "current_version": "v24.1.16",
+      "property_name": "redpanda.container.image",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-kafka/src/main/resources/org/apache/camel/test/infra/kafka/services/container.properties"
+    },
+    "available_versions": [
+      "v25.3.1",
+      "v25.2.11",
+      "v25.2.10",
+      "v25.2.2",
+      "v25.2.1",
+      "v25.1.12",
+      "v25.1.7",
+      "v25.1.5",
+      "v25.1.3",
+      "v25.1.2"
+    ],
+    "latest_version": "v25.3.1",
+    "newer_versions": [
+      "v25.3.1",
+      "v25.2.11",
+      "v25.2.10",
+      "v25.2.2",
+      "v25.2.1"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "quay.io",
+      "namespace": "strimzi",
+      "name": "kafka",
+      "current_version": "latest-kafka-3.9.1",
+      "property_name": "strimzi.container.image",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-kafka/src/main/resources/org/apache/camel/test/infra/kafka/services/container.properties"
+    },
+    "available_versions": [
+      "sha256-ffcba1ad2bdff39f0b59a935990617d539cc9a29720e44168a8cdd021c0a05b5.sig",
+      "sha256-ff860b2abdbc1f6b403a13b5999422fb915118f0f6922cebeafa4b6dc3de64a0.sig",
+      "sha256-ff79b36c5b781bd25e02ccdf8850a61137ec9fea5e7944063c15533ff2cefc6d.sig",
+      "sha256-ff502f180ded7aee10ae0310e1c10ab394051384926dbaf137f42c8d845eaf32.sig",
+      "sha256-fef5e04371001c4c413a2dc90b301b93ddb8b0c326ecc4067729b7c2bba25c65.sig",
+      "sha256-fea891095ab86e880cfaeb252325e46d8f7d37f66f57b2be3e4c30ba55aa86c0.sig",
+      "sha256-fdd20f3f5c2a2976b4e009cc83dcf97e2d64de731f711a32c7548b27fca27806.sig",
+      "sha256-fda87d3b6a1cf9cc2179a235075bdff1c432dd642d316c50c7d8a4bf89f378d9.sig",
+      "sha256-fda87d3b6a1cf9cc2179a235075bdff1c432dd642d316c50c7d8a4bf89f378d9.sig",
+      "sha256-fd99d8b8ac2ee4e674d1ddeddc68261a83eb10e09dfc8a71d9604e769e2d8eb9.sig"
+    ],
+    "latest_version": "sha256-ffcba1ad2bdff39f0b59a935990617d539cc9a29720e44168a8cdd021c0a05b5.sig",
+    "newer_versions": [
+      "sha256-ffcba1ad2bdff39f0b59a935990617d539cc9a29720e44168a8cdd021c0a05b5.sig",
+      "sha256-ff860b2abdbc1f6b403a13b5999422fb915118f0f6922cebeafa4b6dc3de64a0.sig",
+      "sha256-ff79b36c5b781bd25e02ccdf8850a61137ec9fea5e7944063c15533ff2cefc6d.sig",
+      "sha256-ff502f180ded7aee10ae0310e1c10ab394051384926dbaf137f42c8d845eaf32.sig",
+      "sha256-fef5e04371001c4c413a2dc90b301b93ddb8b0c326ecc4067729b7c2bba25c65.sig"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "confluentinc",
+      "name": "cp-kafka",
+      "current_version": "7.9.2",
+      "property_name": "confluent.container.image",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-kafka/src/main/resources/org/apache/camel/test/infra/kafka/services/container.properties"
+    },
+    "available_versions": [
+      "latest-ubi9",
+      "8.1.0",
+      "8.0.2",
+      "8.0.0",
+      "7.9.5",
+      "7.9.4",
+      "7.9.3",
+      "7.9.2",
+      "7.9.1",
+      "7.9.0"
+    ],
+    "latest_version": "latest-ubi9",
+    "newer_versions": [
+      "latest-ubi9",
+      "8.1.0",
+      "8.0.2",
+      "8.0.0",
+      "7.9.5"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "keycloak",
+      "name": "keycloak",
+      "current_version": "26.3.5",
+      "property_name": "keycloak.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-keycloak/src/main/resources/org/apache/camel/test/infra/keycloak/services/container.properties"
+    },
+    "available_versions": [
+      "nightly",
+      "26.4.7",
+      "26.4.6",
+      "26.4.5",
+      "26.4.4",
+      "26.4.2-0",
+      "26.4.2",
+      "26.4.1",
+      "26.4.0",
+      "26.4"
+    ],
+    "latest_version": "nightly",
+    "newer_versions": [
+      "nightly",
+      "26.4.7",
+      "26.4.6",
+      "26.4.5",
+      "26.4.4"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "quay.io",
+      "namespace": "jbosstm",
+      "name": "lra-coordinator",
+      "current_version": "5.13.1.Final-2.16.6.Final",
+      "property_name": "microprofile.lra.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-microprofile-lra/src/main/resources/org/apache/camel/test/infra/microprofile/lra/services/container.properties"
+    },
+    "available_versions": [
+      "7.2.2.Final-3.29.3",
+      "7.2.2.Final-3.29.2",
+      "7.2.2.Final-3.29.0",
+      "7.2.2.Final-3.28.5",
+      "7.2.2.Final-3.28.3",
+      "7.2.2.Final-3.28.2",
+      "7.2.2.Final-3.28.1",
+      "7.2.2.Final-3.26.4",
+      "7.2.2.Final-3.26.3",
+      "7.2.2.Final-3.26.2"
+    ],
+    "latest_version": "7.2.2.Final-3.29.3",
+    "newer_versions": [
+      "7.2.2.Final-3.29.3",
+      "7.2.2.Final-3.29.2",
+      "7.2.2.Final-3.29.0",
+      "7.2.2.Final-3.28.5",
+      "7.2.2.Final-3.28.3"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "icr.io",
+      "namespace": "ppc64le-oss/quarkus",
+      "name": "lra-coordinator-quarkus-jvm",
+      "current_version": "latest",
+      "property_name": "microprofile.lra.container.ppc64le",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-microprofile-lra/src/main/resources/org/apache/camel/test/infra/microprofile/lra/services/container.properties"
+    },
+    "available_versions": [],
+    "latest_version": null,
+    "newer_versions": [],
+    "is_latest": true,
+    "error": "No versions found in registry"
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "milvusdb",
+      "name": "milvus",
+      "current_version": "v2.5.11",
+      "property_name": "milvus.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-milvus/src/main/resources/org/apache/camel/test/infra/milvus/services/container.properties"
+    },
+    "available_versions": [
+      "v2.6.6",
+      "v2.6.5",
+      "v2.6.4",
+      "v2.6.3",
+      "v2.6.2",
+      "v2.6.1",
+      "v2.6.0-rc1",
+      "v2.6.0",
+      "v2.5.9",
+      "v2.5.8"
+    ],
+    "latest_version": "v2.6.6",
+    "newer_versions": [
+      "v2.6.6",
+      "v2.6.5",
+      "v2.6.4",
+      "v2.6.3",
+      "v2.6.2"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "icr.io",
+      "namespace": "ppc64le-oss",
+      "name": "milvus-ppc64le",
+      "current_version": "v2.4.11",
+      "property_name": "milvus.container.ppc64le",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-milvus/src/main/resources/org/apache/camel/test/infra/milvus/services/container.properties"
+    },
+    "available_versions": [
+      "v2.5.3",
+      "v2.4.11",
+      "v2.3.3"
+    ],
+    "latest_version": "v2.5.3",
+    "newer_versions": [
+      "v2.5.3"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "minio",
+      "name": "minio",
+      "current_version": "RELEASE.2025-07-23T15-54-02Z-cpuv1",
+      "property_name": "minio.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-minio/src/main/resources/org/apache/camel/test/infra/minio/services/container.properties"
+    },
+    "available_versions": [
+      "latest-cicd",
+      "edge-cicd",
+      "edge",
+      "RELEASE.2025-09-07T16-13-09Z-cpuv1",
+      "RELEASE.2025-09-07T16-13-09Z",
+      "RELEASE.2025-07-23T15-54-02Z-cpuv1",
+      "RELEASE.2025-07-23T15-54-02Z",
+      "RELEASE.2025-07-18T21-56-31Z",
+      "RELEASE.2025-06-13T11-33-47Z-cpuv1",
+      "RELEASE.2025-06-13T11-33-47Z"
+    ],
+    "latest_version": "latest-cicd",
+    "newer_versions": [
+      "latest-cicd",
+      "edge-cicd",
+      "edge",
+      "RELEASE.2025-09-07T16-13-09Z-cpuv1",
+      "RELEASE.2025-09-07T16-13-09Z"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "",
+      "name": "mongo",
+      "current_version": "7.0.12-jammy",
+      "property_name": "mongodb.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-mongodb/src/main/resources/org/apache/camel/test/infra/mongodb/services/container.properties"
+    },
+    "available_versions": [
+      "8.0.9-noble",
+      "8.0.4",
+      "8.0.15",
+      "8.0.14",
+      "8.0.13",
+      "8.0",
+      "8",
+      "7.0.5",
+      "7.0.4-jammy",
+      "7.0.4"
+    ],
+    "latest_version": "8.0.9-noble",
+    "newer_versions": [
+      "8.0.9-noble",
+      "8.0.4",
+      "8.0.15",
+      "8.0.14",
+      "8.0.13"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "icr.io",
+      "namespace": "ppc64le-oss",
+      "name": "mongodb-ppc64le",
+      "current_version": "4.4.24",
+      "property_name": "mongodb.container.ppc64le",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-mongodb/src/main/resources/org/apache/camel/test/infra/mongodb/services/container.properties"
+    },
+    "available_versions": [
+      "6.0.13-bv",
+      "6.0.13",
+      "5.0.26",
+      "5.0.21",
+      "5.0.20",
+      "4.4.24",
+      "4.4.18",
+      "4.4.17"
+    ],
+    "latest_version": "6.0.13-bv",
+    "newer_versions": [
+      "6.0.13-bv",
+      "6.0.13",
+      "5.0.26",
+      "5.0.21",
+      "5.0.20"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "",
+      "name": "eclipse-mosquitto",
+      "current_version": "2.0.18",
+      "property_name": "mosquitto.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-mosquitto/src/main/resources/org/apache/camel/test/infra/mosquitto/services/container.properties"
+    },
+    "available_versions": [
+      "2.0.22",
+      "2.0.18"
+    ],
+    "latest_version": "2.0.22",
+    "newer_versions": [
+      "2.0.22"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "",
+      "name": "nats",
+      "current_version": "2.11.6",
+      "property_name": "nats.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-nats/src/main/resources/org/apache/camel/test/infra/nats/services/container.properties"
+    },
+    "available_versions": [
+      "2.12.2",
+      "2.12.1-alpine",
+      "2.12.1",
+      "2.12.0",
+      "2.12",
+      "2.11.8-alpine",
+      "2.11.6",
+      "2.11.4-alpine3.22",
+      "2.11.4",
+      "2.11.11-alpine"
+    ],
+    "latest_version": "2.12.2",
+    "newer_versions": [
+      "2.12.2",
+      "2.12.1-alpine",
+      "2.12.1",
+      "2.12.0",
+      "2.12"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "",
+      "name": "neo4j",
+      "current_version": "5.26-community-ubi9",
+      "property_name": "neo4j.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-neo4j/src/main/resources/org/apache/camel/test/infra/neo4j/services/container.properties"
+    },
+    "available_versions": [
+      "5.26.17-ubi9",
+      "5.26.17-enterprise-ubi9",
+      "5.26.17-enterprise-bullseye",
+      "5.26.17-enterprise",
+      "5.26.17-community-ubi9",
+      "5.26.17-community-bullseye",
+      "5.26.17-community",
+      "5.26.17-bullseye",
+      "5.26.17",
+      "5.26.14-community-ubi9"
+    ],
+    "latest_version": "5.26.17-ubi9",
+    "newer_versions": [
+      "5.26.17-ubi9",
+      "5.26.17-enterprise-ubi9",
+      "5.26.17-enterprise-bullseye",
+      "5.26.17-enterprise",
+      "5.26.17-community-ubi9"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "icr.io",
+      "namespace": "ppc64le-oss",
+      "name": "neo4j-ppc64le",
+      "current_version": "5.26.0",
+      "property_name": "neo4j.container.ppc64le",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-neo4j/src/main/resources/org/apache/camel/test/infra/neo4j/services/container.properties"
+    },
+    "available_versions": [
+      "5.26.0",
+      "5.9.0"
+    ],
+    "latest_version": "5.26.0",
+    "newer_versions": [],
+    "is_latest": true,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "ollama",
+      "name": "ollama",
+      "current_version": "0.12.5",
+      "property_name": "ollama.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-ollama/src/main/resources/org/apache/camel/test/infra/ollama/services/container.properties"
+    },
+    "available_versions": [
+      "rocm",
+      "0.9.6",
+      "0.9.0",
+      "0.7.1",
+      "0.6.8",
+      "0.6.6",
+      "0.6.5",
+      "0.6.2",
+      "0.6.1",
+      "0.6.0"
+    ],
+    "latest_version": "rocm",
+    "newer_versions": [
+      "rocm",
+      "0.13.0",
+      "0.12.9",
+      "0.12.6",
+      "0.12.11"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "docker.io",
+      "namespace": "",
+      "name": "granite4",
+      "current_version": "3b",
+      "property_name": "ollama.model",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-ollama/src/main/resources/org/apache/camel/test/infra/ollama/services/container.properties"
+    },
+    "available_versions": [],
+    "latest_version": null,
+    "newer_versions": [],
+    "is_latest": true,
+    "error": "No versions found in registry"
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "osixia",
+      "name": "openldap",
+      "current_version": "1.5.0",
+      "property_name": "openldap.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-openldap/src/main/resources/org/apache/camel/test/infra/openldap/services/container.properties"
+    },
+    "available_versions": [
+      "stable",
+      "1.5.0",
+      "1.4.0",
+      "1.3.0",
+      "1.2.4"
+    ],
+    "latest_version": "stable",
+    "newer_versions": [
+      "stable"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "opensearchproject",
+      "name": "opensearch",
+      "current_version": "3.3.1",
+      "property_name": "opensearch.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-opensearch/src/main/resources/org/apache/camel/test/infra/opensearch/services/container.properties"
+    },
+    "available_versions": [
+      "3.3.2",
+      "3.3.1",
+      "3.3.0",
+      "3.2.0",
+      "3.1.0",
+      "3",
+      "3.0.0",
+      "2.19.4",
+      "2.19.3",
+      "2.19.2"
+    ],
+    "latest_version": "3.3.2",
+    "newer_versions": [
+      "3.3.2"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "icr.io",
+      "namespace": "ppc64le-oss",
+      "name": "opensearch-ppc64le",
+      "current_version": "2.12.0",
+      "property_name": "opensearch.container.ppc64le",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-opensearch/src/main/resources/org/apache/camel/test/infra/opensearch/services/container.properties"
+    },
+    "available_versions": [
+      "2.12.0"
+    ],
+    "latest_version": "2.12.0",
+    "newer_versions": [],
+    "is_latest": true,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "ghcr.io",
+      "namespace": "pinecone-io",
+      "name": "pinecone-local",
+      "current_version": "v1.0.0.rc0",
+      "property_name": "pinecone.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-pinecone/src/main/resources/org/apache/camel/test/infra/pinecone/services/container.properties"
+    },
+    "available_versions": [],
+    "latest_version": null,
+    "newer_versions": [],
+    "is_latest": false,
+    "error": "GHCR API error: 401 Client Error: Unauthorized for url: https://ghcr.io/v2/pinecone-io/pinecone-local/tags/list"
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "",
+      "name": "postgres",
+      "current_version": "17.5-alpine",
+      "property_name": "postgres.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-postgres/src/main/resources/org/apache/camel/test/infra/postgres/services/container.properties"
+    },
+    "available_versions": [
+      "trixie",
+      "bookworm",
+      "alpine3.22",
+      "alpine3.21",
+      "alpine3.20",
+      "alpine",
+      "9.6.8",
+      "9.6.24-alpine",
+      "9.6.19",
+      "9.6.16-alpine"
+    ],
+    "latest_version": "trixie",
+    "newer_versions": [
+      "trixie",
+      "bookworm",
+      "alpine3.22",
+      "alpine3.21",
+      "alpine3.20"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "apachepulsar",
+      "name": "pulsar",
+      "current_version": "4.1.1",
+      "property_name": "pulsar.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-pulsar/src/main/resources/org/apache/camel/test/infra/pulsar/services/container.properties"
+    },
+    "available_versions": [
+      "4.1.1",
+      "4.1.0",
+      "4.0.7",
+      "4.0.6",
+      "4.0.2",
+      "3.3.9",
+      "3.3.7",
+      "3.2.4",
+      "3.2.1",
+      "3.2.0"
+    ],
+    "latest_version": "4.1.1",
+    "newer_versions": [],
+    "is_latest": true,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "qdrant",
+      "name": "qdrant",
+      "current_version": "v1.15.1-unprivileged",
+      "property_name": "qdrant.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-qdrant/src/main/resources/org/apache/camel/test/infra/qdrant/services/container.properties"
+    },
+    "available_versions": [
+      "v1.9.7-unprivileged",
+      "v1.9.7",
+      "v1.9.2",
+      "v1.9.1",
+      "v1.8.4",
+      "v1.8.1",
+      "v1.8.0",
+      "v1.7.4",
+      "v1.7.3",
+      "v1.7.2"
+    ],
+    "latest_version": "v1.9.7-unprivileged",
+    "newer_versions": [
+      "v1.9.7-unprivileged",
+      "v1.9.7",
+      "v1.9.2",
+      "v1.9.1",
+      "v1.8.4"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "icr.io",
+      "namespace": "ppc64le-oss",
+      "name": "qdrant-ppc64le",
+      "current_version": "1.14.1",
+      "property_name": "qdrant.container.ppc64le",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-qdrant/src/main/resources/org/apache/camel/test/infra/qdrant/services/container.properties"
+    },
+    "available_versions": [
+      "1.14.1"
+    ],
+    "latest_version": "1.14.1",
+    "newer_versions": [],
+    "is_latest": true,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "",
+      "name": "rabbitmq",
+      "current_version": "4.1.2-management",
+      "property_name": "rabbitmq.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-rabbitmq/src/main/resources/org/apache/camel/test/infra/rabbitmq/services/container.properties"
+    },
+    "available_versions": [
+      "management",
+      "4.2-management-alpine",
+      "4.2-management",
+      "4.1.4",
+      "4.1.2-management",
+      "4.0.8",
+      "4.0.3-management",
+      "4.0-management-alpine",
+      "4-management",
+      "3.9.9-management"
+    ],
+    "latest_version": "management",
+    "newer_versions": [
+      "management",
+      "4.2-management-alpine",
+      "4.2-management",
+      "4.1.4"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "",
+      "name": "redis",
+      "current_version": "7.4.0-alpine",
+      "property_name": "redis.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-redis/src/main/resources/org/apache/camel/test/infra/redis/services/container.properties"
+    },
+    "available_versions": [
+      "alpine3.21",
+      "alpine3.12",
+      "alpine",
+      "8.4.0-alpine",
+      "8.4.0",
+      "8.4",
+      "8.2.3-alpine",
+      "8.2.3",
+      "8.2.2-alpine3.22",
+      "8.2.2-alpine"
+    ],
+    "latest_version": "alpine3.21",
+    "newer_versions": [
+      "alpine3.21",
+      "alpine3.12",
+      "alpine",
+      "8.4.0-alpine",
+      "8.4.0"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "",
+      "name": "solr",
+      "current_version": "9.9.0-slim",
+      "property_name": "solr.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-solr/src/main/resources/org/apache/camel/test/infra/solr/services/container.properties"
+    },
+    "available_versions": [
+      "9.9.0-slim",
+      "9.8.0-slim",
+      "9.8",
+      "9.0.0",
+      "8.11.2",
+      "6.5-alpine"
+    ],
+    "latest_version": "9.9.0-slim",
+    "newer_versions": [],
+    "is_latest": true,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "tensorflow",
+      "name": "serving",
+      "current_version": "2.18.0",
+      "property_name": "tensorflow.serving.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-tensorflow-serving/src/test/resources/org/apache/camel/test/infra/tensorflow/serving/services/container.properties"
+    },
+    "available_versions": [
+      "latest-gpu",
+      "2.9.3-gpu",
+      "2.9.3",
+      "2.8.4-gpu",
+      "2.8.4",
+      "2.8.2",
+      "2.8.0-gpu",
+      "2.8.0",
+      "2.7.0-gpu",
+      "2.6.2"
+    ],
+    "latest_version": "latest-gpu",
+    "newer_versions": [
+      "latest-gpu",
+      "2.9.3-gpu",
+      "2.8.4-gpu",
+      "2.8.0-gpu",
+      "2.7.0-gpu"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "docker.io",
+      "namespace": "bitnami",
+      "name": "tensorflow-serving",
+      "current_version": "2.18.0",
+      "property_name": "tensorflow.serving.container.aarch64",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-tensorflow-serving/src/test/resources/org/apache/camel/test/infra/tensorflow/serving/services/container.properties"
+    },
+    "available_versions": [],
+    "latest_version": null,
+    "newer_versions": [],
+    "is_latest": true,
+    "error": "No versions found in registry"
+  },
+  {
+    "image": {
+      "registry": "docker.io",
+      "namespace": "ibmcom",
+      "name": "powerai",
+      "current_version": "1.6.2-tensorflow-serving-ubuntu18.04-py37-ppc64le-21.036",
+      "property_name": "tensorflow.serving.container.ppc64le",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-tensorflow-serving/src/test/resources/org/apache/camel/test/infra/tensorflow/serving/services/container.properties"
+    },
+    "available_versions": [
+      "1.7.0-xgboost-ubuntu18.04-py37-x86_64-20.335",
+      "1.7.0-xgboost-ubuntu18.04-py37-x86_64-20.202",
+      "1.7.0-xgboost-ubuntu18.04-py37-x86_64-20.136",
+      "1.7.0-xgboost-ubuntu18.04-py37-x86_64-20.128",
+      "1.7.0-xgboost-ubuntu18.04-py37-x86_64-20.050",
+      "1.7.0-xgboost-ubuntu18.04-py37-x86_64",
+      "1.7.0-xgboost-ubuntu18.04-py37-ppc64le-21.035",
+      "1.7.0-xgboost-ubuntu18.04-py37-ppc64le-20.335",
+      "1.7.0-xgboost-ubuntu18.04-py37-ppc64le-20.202",
+      "1.7.0-xgboost-ubuntu18.04-py37-ppc64le-20.136"
+    ],
+    "latest_version": "1.7.0-xgboost-ubuntu18.04-py37-x86_64-20.335",
+    "newer_versions": [
+      "1.7.0-xgboost-ubuntu18.04-py37-x86_64-20.335",
+      "1.7.0-xgboost-ubuntu18.04-py37-x86_64-20.202",
+      "1.7.0-xgboost-ubuntu18.04-py37-x86_64-20.136",
+      "1.7.0-xgboost-ubuntu18.04-py37-x86_64-20.128",
+      "1.7.0-xgboost-ubuntu18.04-py37-x86_64-20.050"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "pytorch",
+      "name": "torchserve",
+      "current_version": "0.12.0-cpu",
+      "property_name": "torchserve.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-torchserve/src/main/resources/org/apache/camel/test/infra/torchserve/services/container.properties"
+    },
+    "available_versions": [
+      "latest-gpu",
+      "latest-cpu",
+      "0.9.0-gpu",
+      "0.9.0-cpu",
+      "0.8.2-gpu",
+      "0.8.2-cpu",
+      "0.6.1-gpu",
+      "0.6.1-cpu",
+      "0.6.0-gpu",
+      "0.6.0-cpu"
+    ],
+    "latest_version": "latest-gpu",
+    "newer_versions": [
+      "latest-gpu",
+      "latest-cpu",
+      "0.9.0-gpu",
+      "0.9.0-cpu",
+      "0.8.2-gpu"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "nvcr.io",
+      "namespace": "nvidia",
+      "name": "tritonserver",
+      "current_version": "24.12-py3",
+      "property_name": "triton.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-triton/src/main/resources/org/apache/camel/test/infra/triton/services/container.properties"
+    },
+    "available_versions": [],
+    "latest_version": null,
+    "newer_versions": [],
+    "is_latest": false,
+    "error": "NVIDIA Registry API error: 401 Client Error: Unauthorized for url: https://nvcr.io/v2/nvidia/tritonserver/tags/list"
+  },
+  {
+    "image": {
+      "registry": "cr.weaviate.io",
+      "namespace": "semitechnologies",
+      "name": "weaviate",
+      "current_version": "1.32.0",
+      "property_name": "weaviate.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-weaviate/src/main/resources/org/apache/camel/test/infra/weaviate/services/container.properties"
+    },
+    "available_versions": [
+      "very-long-classification-timeouts",
+      "vector-search-experimental_v6",
+      "vector-search-experimental_v5",
+      "vector-search-experimental_v4",
+      "vector-search-experimental_v3",
+      "vector-search-experimental_v2",
+      "vector-search-experimental",
+      "v1.8.0-rc.1-wal-fixes",
+      "v1.19.0-prealpha-node-selection-with-logging-4",
+      "v1.19.0-prealpha-node-selection-with-logging-3"
+    ],
+    "latest_version": "very-long-classification-timeouts",
+    "newer_versions": [
+      "very-long-classification-timeouts",
+      "vector-search-experimental_v6",
+      "vector-search-experimental_v5",
+      "vector-search-experimental_v4",
+      "vector-search-experimental_v3"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "icr.io",
+      "namespace": "ppc64le-oss",
+      "name": "weaviate-ppc64le",
+      "current_version": "1.31.1",
+      "property_name": "weaviate.container.ppc64le",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-weaviate/src/main/resources/org/apache/camel/test/infra/weaviate/services/container.properties"
+    },
+    "available_versions": [
+      "1.31.1"
+    ],
+    "latest_version": "1.31.1",
+    "newer_versions": [],
+    "is_latest": true,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "5mattho",
+      "name": "vysper-wrapper",
+      "current_version": "0.3",
+      "property_name": "xmpp.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-xmpp/src/main/resources/org/apache/camel/test/infra/xmpp/services/container.properties"
+    },
+    "available_versions": [],
+    "latest_version": null,
+    "newer_versions": [],
+    "is_latest": true,
+    "error": "No versions found in registry"
+  },
+  {
+    "image": {
+      "registry": "mirror.gcr.io",
+      "namespace": "",
+      "name": "zookeeper",
+      "current_version": "3.9",
+      "property_name": "zookeeper.container",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-zookeeper/src/main/resources/org/apache/camel/test/infra/zookeeper/services/container.properties"
+    },
+    "available_versions": [
+      "3.9.3",
+      "3.9.2",
+      "3.9.1",
+      "3.9",
+      "3.8.3",
+      "3.8.0",
+      "3.7.2",
+      "3.7.0",
+      "3.6.3",
+      "3.5.9"
+    ],
+    "latest_version": "3.9.3",
+    "newer_versions": [
+      "3.9.3",
+      "3.9.2",
+      "3.9.1"
+    ],
+    "is_latest": false,
+    "error": null
+  },
+  {
+    "image": {
+      "registry": "icr.io",
+      "namespace": "ppc64le-oss",
+      "name": "zookeeper-ppc64le",
+      "current_version": "3.5.10",
+      "property_name": "zookeeper.container.ppc64le",
+      "file_path": "/home/runner/work/camel/camel/test-infra/camel-test-infra-zookeeper/src/main/resources/org/apache/camel/test/infra/zookeeper/services/container.properties"
+    },
+    "available_versions": [
+      "v3.9.3-debian-12-r19-bv",
+      "v3.9.3-bv",
+      "v3.8.0-bv",
+      "v3.7.0-bv",
+      "v0.2.14-pravega",
+      "3.5.10"
+    ],
+    "latest_version": "v3.9.3-debian-12-r19-bv",
+    "newer_versions": [
+      "v3.9.3-debian-12-r19-bv",
+      "v3.9.3-bv",
+      "v3.8.0-bv",
+      "v3.7.0-bv",
+      "v0.2.14-pravega"
+    ],
+    "is_latest": false,
+    "error": null
+  }
+]
