@@ -69,16 +69,41 @@ jobs:
           echo "Scanning path: $SCAN_PATH"
 
           # Run the version checker and capture output
-          if python3 check-container-versions.py --scan-path "$SCAN_PATH" $PRERELEASE_FLAG --json > versions.json; then
+          # Use || true to ensure the script runs to completion even if exit code is non-zero
+          set +e
+          python3 check-container-versions.py --scan-path "$SCAN_PATH" $PRERELEASE_FLAG --json > versions.json 2>&1
+          EXIT_CODE=$?
+          set -e
+
+          # Check if versions.json exists and is valid JSON
+          if [[ ! -f versions.json ]] || [[ ! -s versions.json ]]; then
+            echo "❌ Error: versions.json not created or is empty"
+            echo "check_passed=error" >> $GITHUB_OUTPUT
+            echo "outdated_count=0" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+
+          # Validate JSON
+          if ! jq empty versions.json 2>/dev/null; then
+            echo "❌ Error: versions.json contains invalid JSON"
+            cat versions.json
+            echo "check_passed=error" >> $GITHUB_OUTPUT
+            echo "outdated_count=0" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+
+          # Count outdated images
+          OUTDATED_COUNT=$(jq '[.[] | select(.is_latest == false and .newer_versions != null and (.newer_versions | length) > 0)] | length' versions.json)
+
+          if [[ "$EXIT_CODE" -eq 0 ]]; then
             echo "check_passed=true" >> $GITHUB_OUTPUT
             echo "outdated_count=0" >> $GITHUB_OUTPUT
           else
             echo "check_passed=false" >> $GITHUB_OUTPUT
-
-            # Count outdated images
-            OUTDATED_COUNT=$(jq '[.[] | select(.is_latest == false and .newer_versions != null and (.newer_versions | length) > 0)] | length' versions.json)
             echo "outdated_count=$OUTDATED_COUNT" >> $GITHUB_OUTPUT
           fi
+
+          echo "Found $OUTDATED_COUNT outdated images"
 
       - name: Update container.properties files
         if: steps.version_check.outputs.check_passed == 'false'
