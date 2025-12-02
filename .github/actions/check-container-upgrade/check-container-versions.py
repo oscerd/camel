@@ -34,6 +34,36 @@ Supported Registries:
     - Microsoft Container Registry (mcr.microsoft.com)
     - Weaviate Container Registry (cr.weaviate.io)
 
+Version Filtering:
+    You can control which version tags are considered valid by adding whitelist/blacklist
+    properties in your container.properties files:
+
+    Whitelist (include): Only versions containing these words will be considered
+        <property>.version.include=word1,word2,word3
+
+    Blacklist (exclude): Versions containing these words will be excluded
+        <property>.version.exclude=word1,word2,word3
+
+    Examples:
+        # Only accept versions with "alpine"
+        postgres.container=postgres:17.2-alpine
+        postgres.container.version.include=alpine
+
+        # Exclude release candidates and beta versions
+        kafka.container=quay.io/strimzi/kafka:latest-kafka-3.9.1
+        kafka.container.version.exclude=rc,beta,alpha
+
+        # Only numeric versions (no text suffixes)
+        mysql.container=mysql:8.0.35
+        mysql.container.version.exclude=alpine,slim,debian
+
+    Notes:
+        - Filters are case-insensitive
+        - Include filter: version must contain at least ONE of the words
+        - Exclude filter: version must NOT contain ANY of the words
+        - Exclude filters are checked first, then include filters
+        - If no filters specified, all versions are considered
+
 Usage:
     python3 check-container-versions.py [options]
 
@@ -75,6 +105,15 @@ class ContainerImage:
     current_version: str
     property_name: str
     file_path: str
+    version_include: List[str] = None  # Whitelist: version must contain one of these words
+    version_exclude: List[str] = None  # Blacklist: version must not contain any of these words
+
+    def __post_init__(self):
+        """Initialize default values for optional fields."""
+        if self.version_include is None:
+            self.version_include = []
+        if self.version_exclude is None:
+            self.version_exclude = []
 
     @property
     def full_name(self) -> str:
@@ -88,6 +127,28 @@ class ContainerImage:
     def full_image(self) -> str:
         """Returns the complete image reference with version."""
         return f"{self.full_name}:{self.current_version}"
+
+    def is_version_allowed(self, version: str) -> bool:
+        """Check if a version matches the whitelist/blacklist criteria."""
+        version_lower = version.lower()
+
+        # Check blacklist first (exclusions)
+        if self.version_exclude:
+            for exclude_word in self.version_exclude:
+                if exclude_word.lower() in version_lower:
+                    return False
+
+        # Check whitelist (inclusions)
+        if self.version_include:
+            # If whitelist is specified, version must contain at least one of the words
+            for include_word in self.version_include:
+                if include_word.lower() in version_lower:
+                    return True
+            # If whitelist exists but no match found, reject
+            return False
+
+        # No whitelist specified or version passed all checks
+        return True
 
 @dataclass
 class VersionCheckResult:
@@ -556,7 +617,8 @@ class ContainerVersionChecker:
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
 
-            # Parse properties manually to handle comments
+            # First pass: collect all properties
+            properties = {}
             for line_num, line in enumerate(content.splitlines(), 1):
                 line = line.strip()
 
@@ -571,29 +633,60 @@ class ContainerVersionChecker:
                     value = value.strip()
 
                     # Skip if value looks like a property reference
-                    if value.startswith('${') or not value:
+                    if not value or value.startswith('${'):
                         continue
 
-                    try:
-                        registry, namespace, name, current_version = self.parse_container_reference(value)
+                    properties[key] = value
 
-                        image = ContainerImage(
-                            registry=registry,
-                            namespace=namespace,
-                            name=name,
-                            current_version=current_version,
-                            property_name=key,
-                            file_path=file_path
-                        )
-                        images.append(image)
+            # Second pass: build ContainerImage objects
+            processed_keys = set()
 
-                        if self.verbose:
-                            print(f"  Found: {key} = {value}")
+            for key, value in properties.items():
+                # Skip if already processed or if it's a filter property
+                if key in processed_keys or '.version.include' in key or '.version.exclude' in key:
+                    continue
 
-                    except ValueError as e:
-                        if self.verbose:
-                            print(f"  Warning: Could not parse {key}={value}: {e}")
-                        continue
+                try:
+                    registry, namespace, name, current_version = self.parse_container_reference(value)
+
+                    # Check for version filters
+                    version_include = []
+                    version_exclude = []
+
+                    # Look for .version.include property
+                    include_key = f"{key}.version.include"
+                    if include_key in properties:
+                        version_include = [word.strip() for word in properties[include_key].split(',') if word.strip()]
+
+                    # Look for .version.exclude property
+                    exclude_key = f"{key}.version.exclude"
+                    if exclude_key in properties:
+                        version_exclude = [word.strip() for word in properties[exclude_key].split(',') if word.strip()]
+
+                    image = ContainerImage(
+                        registry=registry,
+                        namespace=namespace,
+                        name=name,
+                        current_version=current_version,
+                        property_name=key,
+                        file_path=file_path,
+                        version_include=version_include,
+                        version_exclude=version_exclude
+                    )
+                    images.append(image)
+                    processed_keys.add(key)
+
+                    if self.verbose:
+                        print(f"  Found: {key} = {value}")
+                        if version_include:
+                            print(f"    Include filter: {', '.join(version_include)}")
+                        if version_exclude:
+                            print(f"    Exclude filter: {', '.join(version_exclude)}")
+
+                except ValueError as e:
+                    if self.verbose:
+                        print(f"  Warning: Could not parse {key}={value}: {e}")
+                    continue
 
         except Exception as e:
             print(f"Error reading {file_path}: {e}")
@@ -642,6 +735,23 @@ class ContainerVersionChecker:
                     error="No versions found in registry"
                 )
 
+            # Apply whitelist/blacklist filters
+            filtered_versions = [v for v in available_versions if image.is_version_allowed(v)]
+
+            if not filtered_versions:
+                return VersionCheckResult(
+                    image=image,
+                    available_versions=[],
+                    latest_version=None,
+                    newer_versions=[],
+                    is_latest=True,
+                    error="No versions match the include/exclude filters"
+                )
+
+            if self.verbose and len(filtered_versions) < len(available_versions):
+                excluded_count = len(available_versions) - len(filtered_versions)
+                print(f"      Filtered out {excluded_count} versions based on include/exclude rules")
+
             # Sort versions
             def version_sort_key(v):
                 try:
@@ -651,10 +761,10 @@ class ContainerVersionChecker:
                     return v
 
             try:
-                sorted_versions = sorted(available_versions, key=version_sort_key, reverse=True)
+                sorted_versions = sorted(filtered_versions, key=version_sort_key, reverse=True)
             except:
                 # If sorting fails, use lexicographic sort
-                sorted_versions = sorted(available_versions, reverse=True)
+                sorted_versions = sorted(filtered_versions, reverse=True)
 
             # Find newer versions
             newer_versions = []
@@ -924,12 +1034,14 @@ Examples:
             if args.verbose:
                 print_registry_summary(results)
 
-            # Exit with non-zero if there are outdated images
-            outdated_count = len([r for r in results if not r.is_latest and not r.error and r.newer_versions])
-            if outdated_count > 0:
+        # Exit with non-zero if there are outdated images (regardless of output mode)
+        outdated_count = len([r for r in results if not r.is_latest and not r.error and r.newer_versions])
+        if outdated_count > 0:
+            if not args.json:
                 print(f"\n💡 Found {outdated_count} outdated images. Consider updating!")
-                sys.exit(1)
-            else:
+            sys.exit(1)
+        else:
+            if not args.json:
                 print(f"\n🎉 All images are up to date!")
 
     except KeyboardInterrupt:
