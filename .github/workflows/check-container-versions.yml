@@ -71,7 +71,7 @@ jobs:
           # Run the version checker and capture output
           # Use || true to ensure the script runs to completion even if exit code is non-zero
           set +e
-          python3 check-container-versions.py --scan-path "$SCAN_PATH" $PRERELEASE_FLAG --json > versions.json 2>&1
+          python3 .github/actions/check-container-upgrade/check-container-versions.py --scan-path "$SCAN_PATH" $PRERELEASE_FLAG --json > versions.json 2>&1
           EXIT_CODE=$?
           set -e
 
