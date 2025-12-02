@@ -108,6 +108,8 @@ jobs:
       - name: Create individual PRs for each container update
         if: steps.version_check.outputs.check_passed == 'false'
         id: create_prs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Create Python script to update a single container
           cat > update_single_container.py << 'SCRIPT_EOF'
