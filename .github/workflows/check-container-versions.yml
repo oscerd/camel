@@ -1,0 +1,331 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+name: Container Version Upgrade
+
+on:
+  schedule:
+    # Run every Monday at 6:00 AM UTC
+    - cron: '0 6 * * MON'
+  workflow_dispatch:
+    inputs:
+      scan_path:
+        description: 'Path to scan for container.properties files'
+        required: false
+        default: 'test-infra'
+      check_prereleases:
+        description: 'Include pre-release versions'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  upgrade-container-versions:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests packaging colorama
+
+      - name: Check container versions
+        id: version_check
+        run: |
+          SCAN_PATH="${{ github.event.inputs.scan_path || 'test-infra' }}"
+          PRERELEASE_FLAG=""
+
+          if [[ "${{ github.event.inputs.check_prereleases }}" == "true" ]]; then
+            PRERELEASE_FLAG="--check-prereleases"
+          fi
+
+          echo "Scanning path: $SCAN_PATH"
+
+          # Run the version checker and capture output
+          if python3 ./github/actions/check-container-upgrade/check-container-versions.py --scan-path "$SCAN_PATH" $PRERELEASE_FLAG --json > versions.json; then
+            echo "check_passed=true" >> $GITHUB_OUTPUT
+            echo "outdated_count=0" >> $GITHUB_OUTPUT
+          else
+            echo "check_passed=false" >> $GITHUB_OUTPUT
+
+            # Count outdated images
+            OUTDATED_COUNT=$(jq '[.[] | select(.is_latest == false and .newer_versions != null and (.newer_versions | length) > 0)] | length' versions.json)
+            echo "outdated_count=$OUTDATED_COUNT" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Update container.properties files
+        if: steps.version_check.outputs.check_passed == 'false'
+        id: update_files
+        run: |
+          # Create a script to update the properties files
+          cat > update_versions.py << 'SCRIPT_EOF'
+          import json
+          import re
+          import sys
+
+          # Load the version check results
+          with open('versions.json', 'r') as f:
+              results = json.load(f)
+
+          updated_files = []
+          updates = []
+
+          for result in results:
+              # Skip if already latest or has errors
+              if result.get('is_latest') or result.get('error'):
+                  continue
+
+              newer_versions = result.get('newer_versions', [])
+              if not newer_versions:
+                  continue
+
+              image = result['image']
+              file_path = image['file_path']
+              property_name = image['property_name']
+              current_version = image['current_version']
+              latest_version = result['latest_version']
+
+              # Read the properties file
+              try:
+                  with open(file_path, 'r', encoding='utf-8') as f:
+                      content = f.read()
+
+                  # Build the full image reference for find/replace
+                  registry = image['registry']
+                  namespace = image['namespace']
+                  name = image['name']
+
+                  # Construct the image path
+                  if namespace:
+                      image_path = f"{registry}/{namespace}/{name}" if registry not in ['docker.io', ''] else f"{namespace}/{name}"
+                  else:
+                      image_path = f"{registry}/{name}" if registry not in ['docker.io', ''] else name
+
+                  # Create the old and new references
+                  old_ref = f"{image_path}:{current_version}"
+                  new_ref = f"{image_path}:{latest_version}"
+
+                  # Also handle case where registry might be implicit
+                  if registry in ['docker.io', '']:
+                      # Try both with and without explicit registry
+                      old_pattern = f"(docker\\.io/)?{re.escape(image_path)}:{re.escape(current_version)}"
+                      new_content = re.sub(old_pattern, new_ref, content)
+                  else:
+                      # Direct replacement
+                      new_content = content.replace(old_ref, new_ref)
+
+                  if new_content != content:
+                      # Write the updated content
+                      with open(file_path, 'w', encoding='utf-8') as f:
+                          f.write(new_content)
+
+                      updated_files.append(file_path)
+                      updates.append({
+                          'property': property_name,
+                          'file': file_path,
+                          'old_version': current_version,
+                          'new_version': latest_version,
+                          'image_name': image_path
+                      })
+
+                      print(f"✅ Updated {property_name}: {current_version} → {latest_version}")
+                  else:
+                      print(f"⚠️  Could not update {property_name} in {file_path}")
+
+              except Exception as e:
+                  print(f"❌ Error updating {file_path}: {e}")
+                  continue
+
+          # Save the updates for PR body
+          with open('updates.json', 'w') as f:
+              json.dump(updates, f, indent=2)
+
+          print(f"\nTotal files updated: {len(updated_files)}")
+          sys.exit(0 if updated_files else 1)
+          SCRIPT_EOF
+
+          # Run the update script
+          if python3 update_versions.py; then
+            echo "updates_made=true" >> $GITHUB_OUTPUT
+          else
+            echo "updates_made=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Generate PR description
+        if: steps.update_files.outputs.updates_made == 'true'
+        id: pr_description
+        run: |
+          # Generate PR body
+          cat > pr_body.md << 'EOF'
+          This PR updates outdated container images in test-infra to their latest versions.
+
+          ## Updated Images
+
+          EOF
+
+          # Add details from updates.json
+          python3 << 'PYTHON_EOF'
+          import json
+
+          with open('updates.json', 'r') as f:
+              updates = json.load(f)
+
+          for update in updates:
+              print(f"### {update['property']}")
+              print(f"- **Image**: `{update['image_name']}`")
+              print(f"- **File**: `{update['file']}`")
+              print(f"- **Old version**: `{update['old_version']}`")
+              print(f"- **New version**: `{update['new_version']}`")
+              print()
+          PYTHON_EOF >> pr_body.md
+
+          cat >> pr_body.md << 'EOF'
+
+          ## Verification
+
+          Please verify:
+          - [ ] All container image versions are compatible with existing tests
+          - [ ] No breaking changes in the updated versions
+          - [ ] Tests pass with the new versions
+
+          ---
+
+          This PR was automatically created by the [Container Version Upgrade workflow](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+          EOF
+
+          # Set output for PR body
+          {
+            echo 'pr_body<<PR_BODY_EOF'
+            cat pr_body.md
+            echo 'PR_BODY_EOF'
+          } >> $GITHUB_OUTPUT
+
+          # Generate commit message
+          UPDATE_COUNT=$(jq 'length' updates.json)
+          echo "commit_message=chore(test-infra): upgrade container images ($UPDATE_COUNT images)" >> $GITHUB_OUTPUT
+
+      - name: Create Pull Request
+        if: steps.update_files.outputs.updates_made == 'true'
+        id: create_pr
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: |
+            ${{ steps.pr_description.outputs.commit_message }}
+
+            Updated container images to latest versions:
+            ${{ steps.pr_description.outputs.pr_body }}
+
+            🤖 Generated with Claude Code
+          branch: automated/container-version-upgrade-${{ github.run_number }}
+          delete-branch: true
+          title: 'chore(test-infra): Upgrade container images to latest versions'
+          body: ${{ steps.pr_description.outputs.pr_body }}
+          labels: |
+            dependencies
+            container-images
+            automated
+          draft: false
+
+      - name: Upload results artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: container-version-check-results
+          path: |
+            versions.json
+            updates.json
+            pr_body.md
+          retention-days: 30
+
+      - name: Job summary
+        if: always()
+        run: |
+          if [[ -f pr_body.md ]]; then
+            cat pr_body.md >> $GITHUB_STEP_SUMMARY
+            if [[ -n "${{ steps.create_pr.outputs.pull-request-number }}" ]]; then
+              echo "" >> $GITHUB_STEP_SUMMARY
+              echo "📬 **Pull Request Created**: #${{ steps.create_pr.outputs.pull-request-number }}" >> $GITHUB_STEP_SUMMARY
+              echo "🔗 **URL**: ${{ steps.create_pr.outputs.pull-request-url }}" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "✅ All container images are up to date!" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Comment on PR with details
+        if: steps.create_pr.outputs.pull-request-number != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+
+            // Read the versions.json for additional context
+            const versions = JSON.parse(fs.readFileSync('versions.json', 'utf8'));
+            const updates = JSON.parse(fs.readFileSync('updates.json', 'utf8'));
+
+            let comment = '## Container Update Details\n\n';
+            comment += `Total images checked: ${versions.length}\n`;
+            comment += `Images updated: ${updates.length}\n\n`;
+
+            comment += '### Registry Distribution\n\n';
+            const registries = {};
+            updates.forEach(u => {
+              const registry = u.image_name.split('/')[0];
+              registries[registry] = (registries[registry] || 0) + 1;
+            });
+
+            for (const [registry, count] of Object.entries(registries)) {
+              comment += `- **${registry}**: ${count} image(s)\n`;
+            }
+
+            comment += '\n### Testing Recommendations\n\n';
+            comment += 'Run the following to verify the updates:\n';
+            comment += '```bash\n';
+            comment += 'mvn clean verify -pl ';
+
+            // Extract unique modules from file paths
+            const modules = new Set();
+            updates.forEach(u => {
+              const match = u.file.match(/test-infra\/(camel-test-infra-[^\/]+)/);
+              if (match) {
+                modules.add(match[1]);
+              }
+            });
+
+            comment += Array.from(modules).join(',');
+            comment += '\n```\n';
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.create_pr.outputs.pull-request-number }},
+              body: comment
+            });
