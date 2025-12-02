@@ -216,7 +216,7 @@ jobs:
           EOF
 
           # Add details from updates.json
-          python3 << 'PYTHON_EOF'
+          python3 << 'PYTHON_EOF' >> pr_body.md
           import json
 
           with open('updates.json', 'r') as f:
@@ -229,7 +229,7 @@ jobs:
               print(f"- **Old version**: `{update['old_version']}`")
               print(f"- **New version**: `{update['new_version']}`")
               print()
-          PYTHON_EOF >> pr_body.md
+          PYTHON_EOF
 
           cat >> pr_body.md << 'EOF'
 
