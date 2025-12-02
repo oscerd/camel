@@ -691,39 +691,45 @@ class ContainerVersionChecker:
                 error=str(e)
             )
 
-    def run_check(self, scan_path: str) -> List[VersionCheckResult]:
+    def run_check(self, scan_path: str, quiet: bool = False) -> List[VersionCheckResult]:
         """Run the version check on all container.properties files."""
-        print(f"🔍 Scanning for container.properties files in {scan_path}...")
+        if not quiet:
+            print(f"🔍 Scanning for container.properties files in {scan_path}...")
 
         properties_files = self.find_container_properties_files(scan_path)
 
         if not properties_files:
-            print("❌ No container.properties files found!")
+            if not quiet:
+                print("❌ No container.properties files found!")
             return []
 
-        print(f"📁 Found {len(properties_files)} container.properties files")
+        if not quiet:
+            print(f"📁 Found {len(properties_files)} container.properties files")
 
         all_images = []
 
         # Parse all properties files
         for file_path in properties_files:
-            if self.verbose:
+            if self.verbose and not quiet:
                 print(f"\n📄 Parsing {file_path}...")
 
             images = self.parse_properties_file(file_path)
             all_images.extend(images)
 
         if not all_images:
-            print("❌ No container images found in properties files!")
+            if not quiet:
+                print("❌ No container images found in properties files!")
             return []
 
-        print(f"🐳 Found {len(all_images)} container images")
-        print("🌐 Checking for newer versions...")
+        if not quiet:
+            print(f"🐳 Found {len(all_images)} container images")
+            print("🌐 Checking for newer versions...")
 
         # Check versions for all images
         results = []
         for i, image in enumerate(all_images, 1):
-            print(f"  [{i}/{len(all_images)}] {image.full_image}")
+            if not quiet:
+                print(f"  [{i}/{len(all_images)}] {image.full_image}")
             result = self.check_image_versions(image)
             results.append(result)
             time.sleep(0.1)  # Be nice to APIs
@@ -906,7 +912,8 @@ Examples:
     )
 
     try:
-        results = checker.run_check(scan_path)
+        # Use quiet mode when outputting JSON to avoid non-JSON output
+        results = checker.run_check(scan_path, quiet=args.json)
 
         if args.json:
             print(output_json(results))
