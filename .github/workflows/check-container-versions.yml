@@ -262,8 +262,6 @@ jobs:
 
           ---
 
-          🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
           This PR was automatically created by the [Container Version Upgrade workflow](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
           EOF
 
@@ -274,10 +272,6 @@ jobs:
           chore($MODULE_NAME): upgrade $PROPERTY_NAME to $NEW_VERSION
 
           Update $PROPERTY_NAME from $OLD_VERSION to $NEW_VERSION
-
-          🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-          Co-Authored-By: Claude <noreply@anthropic.com>
           EOF
           )
 
