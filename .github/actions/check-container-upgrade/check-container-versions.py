@@ -924,12 +924,14 @@ Examples:
             if args.verbose:
                 print_registry_summary(results)
 
-            # Exit with non-zero if there are outdated images
-            outdated_count = len([r for r in results if not r.is_latest and not r.error and r.newer_versions])
-            if outdated_count > 0:
+        # Exit with non-zero if there are outdated images (regardless of output mode)
+        outdated_count = len([r for r in results if not r.is_latest and not r.error and r.newer_versions])
+        if outdated_count > 0:
+            if not args.json:
                 print(f"\n💡 Found {outdated_count} outdated images. Consider updating!")
-                sys.exit(1)
-            else:
+            sys.exit(1)
+        else:
+            if not args.json:
                 print(f"\n🎉 All images are up to date!")
 
     except KeyboardInterrupt:
