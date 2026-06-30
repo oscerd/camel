@@ -790,6 +790,10 @@ public class XMLSecurityDataFormat extends ServiceSupport implements DataFormat,
     }
 
     public void setXmlCipherAlgorithm(String xmlCipherAlgorithm) {
+        if (XMLCipher.TRIPLEDES.equals(xmlCipherAlgorithm)) {
+            LOG.warn("The Triple DES (3DES/DESede) XML encryption algorithm is deprecated and cryptographically weak;"
+                     + " prefer AES-256-GCM (the default). The 3DES option is retained only for decrypting legacy data.");
+        }
         this.xmlCipherAlgorithm = xmlCipherAlgorithm;
     }
 
