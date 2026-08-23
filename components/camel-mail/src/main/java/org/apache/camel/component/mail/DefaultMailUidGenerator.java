@@ -19,11 +19,14 @@ package org.apache.camel.component.mail;
 import java.util.Enumeration;
 import java.util.UUID;
 
+import jakarta.mail.Folder;
 import jakarta.mail.Header;
 import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
+import jakarta.mail.UIDFolder;
 
 import org.apache.camel.util.ObjectHelper;
+import org.eclipse.angus.mail.pop3.POP3Folder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,7 +36,13 @@ public class DefaultMailUidGenerator implements MailUidGenerator {
 
     @Override
     public String generateUuid(MailEndpoint mailEndpoint, Message message) {
-        String answer = generateMessageIdHeader(message);
+        // Prefer the identifier the server assigns. Message-ID is chosen by the sending client and is not
+        // required to be unique in practice, so two messages can share one - and this uuid keys idempotent
+        // consumer state and, for POP3, selects which message the commit deletes.
+        String answer = generateProtocolUid(message);
+        if (answer == null) {
+            answer = generateMessageIdHeader(message);
+        }
         if (answer == null) {
             answer = generateMessageHash(message);
         }
@@ -42,6 +51,31 @@ public class DefaultMailUidGenerator implements MailUidGenerator {
             answer = Integer.toString(message.getMessageNumber());
         }
         return answer;
+    }
+
+    /**
+     * Returns the identifier the mail server assigns to the message - the POP3 UIDL or the IMAP folder UID - or null
+     * when the folder does not provide one. Unlike Message-ID this is not under the sender's control and is stable
+     * across polls.
+     */
+    private String generateProtocolUid(Message message) {
+        Folder folder = message.getFolder();
+        if (folder == null) {
+            return null;
+        }
+        try {
+            if (folder instanceof POP3Folder pop3Folder) {
+                String uid = pop3Folder.getUID(message);
+                // prefixed so a server-assigned uid can never collide with a sender-supplied Message-ID
+                return ObjectHelper.isNotEmpty(uid) ? "pop3-" + uid : null;
+            }
+            if (folder instanceof UIDFolder uidFolder) {
+                return "uid-" + uidFolder.getUID(message);
+            }
+        } catch (MessagingException e) {
+            LOG.debug("Cannot read the server assigned uid from the folder. Falling back to the message headers.", e);
+        }
+        return null;
     }
 
     private String generateMessageIdHeader(Message message) {

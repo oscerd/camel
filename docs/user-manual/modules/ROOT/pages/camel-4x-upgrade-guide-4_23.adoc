@@ -145,3 +145,20 @@ being dispatched to the route.
 Requests that differ from the configured context-path only by case are therefore now subject to the
 same constraint as the exact-case form. Deployments that relied on the previous behaviour to reach a
 route without a challenge will now receive `401`.
+
+=== camel-mail - message uuid prefers the server assigned identifier
+
+`DefaultMailUidGenerator` now uses the identifier the mail server assigns to a message - the POP3
+UIDL or the IMAP folder UID - in preference to the `Message-ID` header. The previous order
+(`Message-ID`, then a hash of all headers, then the message number) is kept as the fallback for
+folders that provide no identifier.
+
+`Message-ID` is chosen by the sending client and is not required to be unique in practice. The uuid
+keys idempotent-consumer state and, for POP3, selects which message the commit deletes, so two
+messages sharing a `Message-ID` previously collapsed to one identity.
+
+The uuid values themselves therefore change for POP3 and IMAP consumers. A persistent idempotent
+repository carrying entries written by an earlier version will not match the new values, so messages
+already seen may be processed once more after the upgrade. Clear the repository during the upgrade if
+that matters, or keep the previous behaviour by configuring a custom `mailUidGenerator` that returns
+`Message-ID`.
